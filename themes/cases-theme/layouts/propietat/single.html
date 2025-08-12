@@ -96,16 +96,21 @@
       </section>
 
       <!-- PANEL RESERVA (sticky) -->
-      <!-- PANEL RESERVA (sticky) -->
-<aside id="reserva" class="reserva-card">
+      <aside id="reserva" class="reserva-card">
   <div class="reserva-card__price">
     <div class="from">{{ i18n "from_price" }}</div>
     <div class="amount">{{ .Params.preu | default 0 }}{{ .Site.Params.currency }}<span>{{ i18n "per_night" }}</span></div>
   </div>
 
-  <form id="reserva-form">
+  <form id="reserva-form" action="{{ .Site.Params.formsubmit }}" method="POST" novalidate>
+    <!-- FormSubmit config -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_subject" value="Solicitud de reserva - {{ .Title }}">
+    <input type="text" name="_honey" style="display:none">
+
     <label>{{ i18n "form_name" }}
-      <input type="text" name="nom" required>
+      <input type="text" name="nombre" required>
     </label>
 
     <div class="row-2">
@@ -122,16 +127,20 @@
     </label>
 
     <label>{{ i18n "form_message" }}
-      <textarea name="missatge" rows="4" placeholder="{{ i18n "form_message_ph" }}"></textarea>
+      <textarea name="mensaje" rows="4" placeholder="{{ i18n "form_message_ph" }}"></textarea>
     </label>
 
-    <button class="btn-primary btn-full" type="submit">
+    <button id="reserva-submit" class="btn-primary btn-full" type="submit">
       <i class="fa-solid fa-paper-plane"></i> {{ i18n "send_request" }}
     </button>
 
+    <p id="reserva-error" style="display:none;color:#b00020;margin:.5rem 0 0">
+      {{ i18n "form_error" }}
+    </p>
+
     <div class="contact-inline">
       <a href="tel:+34619234405"><i class="fa-solid fa-phone"></i> {{ i18n "contact_phone" }}</a>
-      <a href="mailto:info@housesinlanzarote.org"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+      <a href="https://wa.me/34619234405"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
     </div>
   </form>
 
@@ -143,27 +152,44 @@
 </aside>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("reserva-form");
-  const successBox = document.getElementById("reserva-success");
+(function () {
+  const form = document.getElementById('reserva-form');
+  if (!form) return;
+  const btn  = document.getElementById('reserva-submit');
+  const done = document.getElementById('reserva-success');
+  const err  = document.getElementById('reserva-error');
+  const sendingTxt = {{ printf "%q" (i18n "form_sending") }};
 
-  form.addEventListener("submit", function (e) {
+  form.addEventListener('submit', async function (e) {
     e.preventDefault();
+    err.style.display = 'none';
+    btn.disabled = true;
+    const original = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ' + sendingTxt;
 
-    fetch("https://formspree.io/f/tu-endpoint", {
-      method: "POST",
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
-    }).then(response => {
-      if (response.ok) {
-        form.style.display = "none";
-        successBox.style.display = "block";
+    try {
+      const resp = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (resp.ok) {
+        form.style.display = 'none';
+        done.style.display = 'block';
+        requestAnimationFrame(()=> done.classList.add('is-visible'));
+        done.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
-        alert("{{ i18n `form_error` }}");
+        throw new Error('Bad response');
       }
-    }).catch(() => alert("{{ i18n `form_error` }}"));
-  });
-});
+    } catch (e) {
+      err.style.display = 'block';
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = original;
+    }
+  }, { passive: false });
+})();
 </script>
     </div>
   </div>

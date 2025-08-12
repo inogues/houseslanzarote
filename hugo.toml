@@ -14,7 +14,7 @@ enableRobotsTXT = true
   etiqueta = "etiquetes"
 
 [outputs]
-  home = ["HTML","RSS","JSON"]
+  home = ["HTML","RSS"]
 
 [markup]
   [markup.goldmark]
@@ -25,6 +25,7 @@ enableRobotsTXT = true
 [params]
   currency = "€"
   logo = "/img/logo.png"
+  formsubmit = "https://formsubmit.co/info@housesinlanzarote.org"
 
 # Idiomes
 [languages]

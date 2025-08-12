@@ -8,7 +8,8 @@
   </div>
 
   <!-- FORMULARIO -->
-  <form id="contact-form" action="https://formsubmit.co/inogues@gmail.com" method="POST" novalidate>
+  <form id="contact-form" action="{{ .Site.Params.formsubmit }}" method="POST" novalidate>
+
     <!-- FormSubmit -->
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_template" value="table">
@@ -82,22 +83,22 @@
       });
 
       if (resp.ok) {
-  form.style.display = 'none';
-  done.style.display = 'block';
-  // activa l’animació
-  requestAnimationFrame(()=> done.classList.add('is-visible'));
-  // porta l’usuari al missatge
-  done.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}  else {
-        throw new Error('Bad response');
-      }
-    } catch (e) {
-      err.style.display = 'block';
-    } finally {
-      btn.disabled = false;
-      btn.innerHTML = original;
-    }
-  }, { passive: false });
-})();
-</script>
+          form.style.display = 'none';
+          done.style.display = 'block';
+          // activa l’animació
+          requestAnimationFrame(()=> done.classList.add('is-visible'));
+          // porta l’usuari al missatge
+          done.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }  else {
+                throw new Error('Bad response');
+              }
+            } catch (e) {
+              err.style.display = 'block';
+            } finally {
+              btn.disabled = false;
+              btn.innerHTML = original;
+            }
+          }, { passive: false });
+        })();
+        </script>
 {{ end }}
