@@ -1,0 +1,15 @@
+<nav class="lang-switcher">
+  {{ range .AllTranslations }}
+    <a href="{{ .RelPermalink }}" lang="{{ .Lang }}" hreflang="{{ .Site.LanguageCode }}">
+      <span class="lang-flag">
+        {{ if eq .Lang "es" }}🇪🇸
+        {{ else if eq .Lang "fr" }}🇫🇷
+        {{ else if eq .Lang "en" }}🇬🇧
+        {{ else if eq .Lang "de" }}🇩🇪
+        {{ else if eq .Lang "it" }}🇮🇹
+        {{ end }}
+      </span>
+      {{ .Site.Language.LanguageName }}
+    </a>
+  {{ end }}
+</nav>

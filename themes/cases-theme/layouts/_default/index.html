@@ -1,0 +1,62 @@
+{{ define "main" }}
+{{ $p := .Params }}
+
+<!-- HERO (textos del md) -->
+<section class="hero -white">
+  <div class="hero-text hero-glass">
+  <div class="hero-text">
+    <h1>{{ or $p.hero_title .Title }}</h1>
+    {{ with $p.hero_subtitle }}<p>{{ . }}</p>{{ end }}
+    {{ with $p.hero_cta_label }}
+      <a class="btn-primary" href="{{ or $p.hero_cta_target "#propiedades" }}">{{ . }}</a>
+    {{ end }}
+  </div>
+
+  {{ if $p.show_quick_contact }}
+  <div class="quick-contact">
+  <a href="tel:+34619234405">
+    <i class="fa-solid fa-phone"></i> +34 619 234 405
+  </a>
+  <a href="mailto:info@housesinlanzarote.org">
+    <i class="fa-solid fa-envelope"></i> info@housesinlanzarote.org
+  </a>
+</div>
+  {{ end }}
+  </div>
+</section>
+
+<!-- INTRO opcional (cos del md) -->
+{{ with .Content }}
+  <div class="container home-intro">{{ . }}</div>
+{{ end }}
+
+<!-- PROPIEDADES (títol/intro del md) -->
+
+<section id="propiedades" class="property-grid container">
+
+  <div class="props-head">
+    <h2>{{ or $p.props_title (i18n "nav_properties") }}</h2>
+    {{ with $p.props_intro }}<p class="props-intro">{{ . }}</p>{{ end }}
+  </div>
+
+  <div class="props-list">
+    <div class="grid grid-3">
+      {{ $limit := or $p.props_limit 3 }}
+{{ partial "home-propierties.html" (dict "limit" $limit "Site" .Site) }}
+    </div>
+  </div>
+
+</section>
+
+<!-- TRUST BAND (llista del md) -->
+{{ partial "trust-band.html" . }}
+
+<!-- ABOUT (textos del md) -->
+<section class="about-snippet container">
+  {{ with $p.about_title }}<h2>{{ . }}</h2>{{ end }}
+  {{ with $p.about_text }}<p>{{ . }}</p>{{ end }}
+  {{ with $p.about_cta_label }}
+    <a class="btn-secondary" href="{{ $.Params.about_cta_url }}">{{ . }}</a>
+  {{ end }}
+</section>
+{{ end }}

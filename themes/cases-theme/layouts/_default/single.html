@@ -1,0 +1,63 @@
+{{ define "main" }}
+{{ $p := .Params }}
+
+<!-- HERO (full-bleed pero respetando que baseof envuelve con .container) -->
+<section class="about-hero" style="{{ with $p.cover }}background-image:url('{{ . }}'){{ end }}">
+  <div class="about-hero__overlay"></div>
+  <div class="about-hero__inner">
+    <h1>{{ .Title }}</h1>
+    {{ with $p.summary }}<p class="lead">{{ . }}</p>{{ end }}
+  </div>
+</section>
+
+<!-- CONTENIDO (todo el texto del MD) -->
+<section class="about-columns">
+  <div class="about-col about-col--left">
+    {{ $parts := split .Content "<!--col-break-->" }}
+    {{ index $parts 0 | safeHTML }}
+  </div>
+  <div class="about-col about-col--right">
+    {{ if gt (len $parts) 1 }}
+      {{ index $parts 1 | safeHTML }}
+    {{ end }}
+  </div>
+</section>
+
+<!-- MOSAICO (opcional: solo si hay .Params.gallery) -->
+{{ with .Params.gallery }}
+<section class="about-mosaic">
+  <div class="mosaic">
+    {{ range . }}
+      <figure class="mosaic__item">
+        <a class="glightbox"
+           href="{{ .src }}"
+           data-gallery="about-{{ $.File.BaseFileName }}"
+           data-title="{{ .alt | default $.Title }}">
+          <img src="{{ .src }}" alt="{{ .alt | default $.Title }}" loading="lazy" decoding="async">
+        </a>
+      </figure>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+<!-- CTA (opcional: todos los textos vienen del MD si existen) -->
+{{ if or $p.cta_title $p.cta_text $p.cta_primary_label $p.cta_secondary_label }}
+<section class="about-cta">
+  <div class="cta-card">
+    <div class="cta-text">
+      {{ with $p.cta_title }}<h2>{{ . }}</h2>{{ end }}
+      {{ with $p.cta_text }}<p>{{ . }}</p>{{ end }}
+      <div class="cta-actions">
+        {{ with $p.cta_primary_label }}
+          <a class="btn-primary" href="{{ $.Params.cta_primary_url | default "/es/propietats/" }}">{{ . }}</a>
+        {{ end }}
+        {{ with $p.cta_secondary_label }}
+          <a class="btn-secondary" href="{{ $.Params.cta_secondary_url | default (printf "mailto:%s" $.Site.Params.email) }}">{{ . }}</a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}

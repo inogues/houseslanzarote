@@ -1,0 +1,24 @@
+{{ define "main" }}
+  <h1>{{ .Title }}</h1>
+
+  {{ if eq .Kind "taxonomyTerm" }}
+    {{/* Página de términos: /amenitats */}}
+    <ul class="terms-list">
+      {{ range .Data.Terms.Alphabetical }}
+        <li>
+          <a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a>
+          ({{ .Count }})
+        </li>
+      {{ end }}
+    </ul>
+
+  {{ else }}
+    {{ with .Content }}<div class="intro">{{ . }}</div>{{ end }}
+    <div class="grid">
+      {{ range .Paginator.Pages }}
+        {{ partial "card-propietat.html" . }}
+      {{ end }}
+    </div>
+    {{ template "_internal/pagination.html" . }}
+  {{ end }}
+{{ end }}

@@ -1,0 +1,110 @@
+- id: nav_properties
+  translation: "Proprietà"
+- id: nav_about
+  translation: "Chi siamo"
+- id: nav_contact
+  translation: "Contatto"
+- id: from_price
+  translation: "Da"
+- id: per_night
+  translation: "/notte"
+- id: capacity
+  translation: "Capacità"
+- id: bedrooms
+  translation: "Camere da letto"
+- id: bathrooms
+  translation: "Bagni"
+- id: area_m2
+  translation: "Superficie"
+- id: amenities
+  translation: "Servizi"
+- id: book
+  translation: "Prenota"
+- id: send_request
+  translation: "Invia richiesta"
+- id: search_placeholder
+  translation: "Cerca per titolo o riassunto"
+- id: all_zones
+  translation: "Tutte le zone"
+- id: location
+  translation: "Posizione"
+- id: map
+  translation: "Mappa"
+- id: book_now
+  translation: "Prenota ora"
+- id: reserve
+  translation: "Prenota"
+- id: form_name
+  translation: "Nome"
+- id: form_email
+  translation: "Email"
+- id: form_checkin
+  translation: "Arrivo"
+- id: form_checkout
+  translation: "Partenza"
+- id: form_message
+  translation: "Messaggio"
+- id: form_message_ph
+  translation: "Dicci le date e il numero di persone…"
+- id: contact_phone
+  translation: "+34 619 234 405"
+- id: contact_email
+  translation: "info@housesinlanzarote.org"
+- id: filters
+  translation: "Filtri"
+- id: filter_zone
+  translation: "Zona"
+- id: filter_amenities
+  translation: "Servizi (tutti)"
+- id: sort_by
+  translation: "Ordina per"
+- id: sort_featured
+  translation: "In evidenza prima"
+- id: sort_price_asc
+  translation: "Prezzo ↑"
+- id: sort_price_desc
+  translation: "Prezzo ↓"
+- id: sort_capacity
+  translation: "Capacità"
+- id: sort_newest
+  translation: "Più recenti"
+- id: featured
+  translation: "In evidenza"
+- id: view_details
+  translation: "Vedi dettagli"
+- id: form_subject_default
+  translation: "Nuovo messaggio dal sito"
+- id: form_name_ph
+  translation: "Il tuo nome"
+- id: form_phone_whatsapp
+  translation: "Telefono / WhatsApp"
+- id: form_subject
+  translation: "Oggetto"
+- id: form_subject_ph
+  translation: "Prenotazione, disponibilità, informazioni…"
+- id: form_message_ph
+  translation: "Dicci le date, le persone e qualsiasi preferenza."
+- id: send_message
+  translation: "Invia messaggio"
+- id: form_sending
+  translation: "Invio…"
+- id: form_error
+  translation: "Si è verificato un errore. Riprova."
+- id: form_thanks_title
+  translation: "Grazie per il tuo messaggio!"
+- id: form_thanks_text
+  translation: "Ti risponderemo il prima possibile. Nel frattempo, puoi vedere le nostre proprietà."
+- id: view_properties
+  translation: "Vedi proprietà"
+- id: form_thanks_title
+  translation: "Grazie per il tuo messaggio!"
+- id: form_thanks_text
+  translation: "Ti risponderemo il prima possibile. Nel frattempo, puoi vedere le nostre proprietà."
+- id: form_error
+  translation: "Si è verificato un errore. Riprova."
+- id: view_properties
+  translation: "Vedi proprietà"
+- id: filter_amenities
+  translation: "Servizi (tutti)"
+- id: view_details
+  translation: "Vedi dettagli"

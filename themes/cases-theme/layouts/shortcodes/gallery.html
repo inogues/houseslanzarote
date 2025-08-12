@@ -1,0 +1,22 @@
+{{/* Reuneix totes les imatges d’aquest bundle */}}
+{{ $images := .Page.Resources.ByType "image" }}
+{{ if not (len $images) }}{{ return }}{{ end }}
+
+<div class="gallery grid">
+  {{ range $i, $img := $images }}
+    {{/* 3 mides per a srcset (qualitat 75) */}}
+    {{ $s480  := $img.Fit "480x q75" }}
+    {{ $s800  := $img.Fit "800x q75" }}
+    {{ $s1200 := $img.Fit "1200x q75" }}
+    {{ $full  := $img.Fit "1800x q80" }}
+
+    <a href="{{ $full.RelPermalink }}" class="glightbox" data-gallery="gallery-main" data-title="{{ $.Page.Title }}">
+      <img
+        src="{{ $s800.RelPermalink }}"
+        srcset="{{ $s480.RelPermalink }} 480w, {{ $s800.RelPermalink }} 800w, {{ $s1200.RelPermalink }} 1200w"
+        sizes="(min-width: 1000px) 33vw, (min-width: 600px) 50vw, 100vw"
+        alt="{{ $.Page.Title }} - foto {{ add $i 1 }}"
+        loading="lazy" decoding="async">
+    </a>
+  {{ end }}
+</div>

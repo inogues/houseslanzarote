@@ -1,0 +1,167 @@
+baseURL = "https://housesinlanzarote.eu/"
+title = "Villes Vacacionals a Lanzarote"
+theme = "cases-theme"
+defaultContentLanguage = "es"           # idioma per defecte (canvia'l si vols)
+defaultContentLanguageInSubdir = true   # força prefix /es/, /en/, /de/, /fr
+enableRobotsTXT = true
+[pagination]
+  pagerSize = 9
+
+# Taxonomies (el "slug" de la taxo és únic; el nom visible el traduirem via i18n)
+[taxonomies]
+  zona = "zones"
+  amenitat = "amenitats"
+  etiqueta = "etiquetes"
+
+[outputs]
+  home = ["HTML","RSS","JSON"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+# Paràmetres globals (pots sobreescriure'ls per idioma a [languages.xx.params])
+[params]
+  currency = "€"
+  logo = "/img/logo.png"
+
+# Idiomes
+[languages]
+
+  [languages.es]
+    languageCode = "es-ES"
+    languageName = "Español"
+    weight = 1
+    title = "Villas Vacacionales en Lanzarote"
+    [languages.es.params]
+      owner = "PROIS S.L."
+      address = "Lanzarote, Islas Canarias"
+      email = "info@housesinlanzarote.eu"
+      phone = "+34 619 234 405"
+
+    [[languages.es.menu.main]]
+      name = "Inicio"
+      url = "/"
+      weight = 1
+    [[languages.es.menu.main]]
+      name = "Propiedades"
+      url = "/es/propietats/"
+      weight = 2
+    [[languages.es.menu.main]]
+      name = "Sobre nosotros"
+      url = "/sobre/"
+      weight = 3
+    [[languages.es.menu.main]]
+      name = "Contacto"
+      url = "/contact/"
+      weight = 4
+
+  [languages.en]
+    languageCode = "en-GB"
+    languageName = "English"
+    weight = 2
+    title = "Holiday Homes in Lanzarote"
+    [languages.en.params]
+      owner = "PROIS S.L."
+      address = "Lanzarote, Canary Islands"
+      email = "info@housesinlanzarote.eu"
+      phone = "+34 619 234 405"
+    [[languages.en.menu.main]]
+      name = "Home"
+      url = "/"
+      weight = 1
+    [[languages.en.menu.main]]
+      name = "Properties"
+      url = "/en/propietats/"
+      weight = 2
+    [[languages.en.menu.main]]
+      name = "About"
+      url = "/en/about/"
+      weight = 3
+    [[languages.en.menu.main]]
+      name = "Contact"
+      url = "/en/contact/"
+      weight = 4
+
+  [languages.de]
+    languageCode = "de-DE"
+    languageName = "Deutsch"
+    weight = 3
+    title = "Ferienhäuser auf Lanzarote"
+    [languages.de.params]
+      owner = "PROIS S.L."
+      address = "Lanzarote, Kanarische Inseln"
+      email = "info@housesinlanzarote.eu"
+      phone = "+34 619 234 405"
+    [[languages.de.menu.main]]
+      name = "Startseite"
+      url = "/"
+      weight = 1
+    [[languages.de.menu.main]]
+      name = "Unterkünfte"
+      url = "/de/propietats/"
+      weight = 2
+    [[languages.de.menu.main]]
+      name = "Über uns"
+      url = "/de/about/"
+      weight = 3
+    [[languages.de.menu.main]]
+      name = "Kontakt"
+      url = "/de/contact/"
+      weight = 4
+
+  [languages.fr]
+    languageCode = "fr-FR"
+    languageName = "Français"
+    weight = 4
+    title = "Maisons de Vacances à Lanzarote"
+    [languages.fr.params]
+      owner = "PROIS S.L."
+      address = "Lanzarote, Îles Canaries"
+      email = "info@housesinlanzarote.eu"
+      phone = "+34 619 234 405"
+    [[languages.fr.menu.main]]
+      name = "Accueil"
+      url = "/"
+      weight = 1
+    [[languages.fr.menu.main]]
+      name = "Propriétés"
+      url = "/fr/propietats/"
+      weight = 2
+    [[languages.fr.menu.main]]
+      name = "À propos"
+      url = "/fr/a-propos/"
+      weight = 3
+    [[languages.fr.menu.main]]
+      name = "Contact"
+      url = "/fr/contact/"
+      weight = 4
+  
+  [languages.it]
+    languageCode = "it-IT"
+    languageName = "Italiano"
+    weight = 5
+    title = "Case Vacanza a Lanzarote"
+    [languages.it.params]
+      owner = "PROIS S.L."
+      address = "Lanzarote, Isole Canarie"
+      email = "info@housesinlanzarote.eu"
+      phone = "+34 619 234 405"
+
+    [[languages.it.menu.main]]
+      name = "Home"
+      url = "/"
+      weight = 1
+    [[languages.it.menu.main]]
+      name = "Proprietà"
+      url = "/it/propietats/"
+      weight = 2
+    [[languages.it.menu.main]]
+      name = "Chi siamo"
+      url = "/it/about/"
+      weight = 3
+    [[languages.it.menu.main]]
+      name = "Contatto"
+      url = "/it/contact/"
+      weight = 4

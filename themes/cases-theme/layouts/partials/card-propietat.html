@@ -1,0 +1,82 @@
+<article class="card -prop">
+  <a href="{{ .RelPermalink }}" class="card__link">
+
+{{/* IMAGEN COVER: imatges[0] -> params.cover -> /img/{slug[-lanzarote]}-cover.jpg */}}
+{{ $img := "" }}
+    {{ with .Params.imatges }}
+    {{ $img = index . 0 }}
+    {{ else }}
+    {{ with .Params.cover }}
+        {{ $img = . }}
+    {{ else }}
+        {{/* slug = carpeta del bundle; si no acaba en -lanzarote, l'afegim */}}
+        {{ $slug := "" }}
+        {{ with .File }}
+        {{ $slug = (path.Base .Dir) | urlize }}
+        {{ else }}
+        {{ $slug = .Title | urlize }}
+        {{ end }}
+        {{ if not (hasSuffix $slug "-lanzarote") }}
+        {{ $slug = printf "%s-%s" $slug "lanzarote" }}
+        {{ end }}
+        {{ $img = printf "/img/%s-cover.jpg" $slug }}
+    {{ end }}
+    {{ end }}
+
+    <div class="card__media">
+      {{ with $img }}
+        <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" decoding="async"
+             style="object-fit:cover;width:100%;height:220px;">
+      {{ end }}
+      {{ with .Params.preu }}
+        <span class="price-badge">{{ i18n "from_price" }} {{ . }}{{ $.Site.Params.currency }}{{ i18n "per_night" }}</span>
+      {{ end }}
+      {{ if eq (or .Params.featured false) true }}
+        <span class="featured-badge"><i class="fa-solid fa-star"></i> {{ i18n "featured" }}</span>
+      {{ end }}
+    </div>
+
+    <div class="card__body">
+      <h3 class="card__title">{{ .Title }}</h3>
+      <p class="card__meta">
+        {{ with .Params.zona }}
+          <i class="fa-solid fa-location-dot"></i> {{ delimit . ", " }}
+        {{ end }}
+        {{ if .Params.capacitat }} · <i class="fa-solid fa-users"></i> {{ .Params.capacitat }}{{ end }}
+        {{ with .Params.habitacions }} · <i class="fa-solid fa-bed"></i> {{ . }}{{ end }}
+        {{ with .Params.banys }} · <i class="fa-solid fa-bath"></i> {{ . }}{{ end }}
+      </p>
+
+      {{ with .Params.summary }}<p class="card__desc">{{ . }}</p>{{ end }}
+
+      {{ $iconMap := dict
+        "wifi" "fa-wifi"
+        "piscina" "fa-person-swimming"
+        "piscina climatizada" "fa-temperature-three-quarters"
+        "jacuzzi" "fa-hot-tub-person"
+        "aire acondicionado" "fa-fan"
+        "aparcamiento privado" "fa-square-parking"
+        "aparcamiento" "fa-square-parking"
+        "barbacoa" "fa-fire-burner"
+        "jardín" "fa-leaf"
+        "terraza" "fa-umbrella-beach"
+        "cocina" "fa-kitchen-set"
+        "cocina equipada" "fa-kitchen-set"
+        "lavadora" "fa-soap"
+        "smart tv" "fa-tv"
+        "tv" "fa-tv"
+      }}
+      {{ with .Params.amenitats }}
+        <ul class="mini-amenities">
+          {{ range first 4 . }}
+            {{ $label := . }}
+            {{ $icon := index $iconMap (lower $label) | default "fa-circle-check" }}
+            <li><i class="fa-solid {{ $icon }}"></i> {{ $label }}</li>
+          {{ end }}
+        </ul>
+      {{ end }}
+
+      <span class="btn-inline">{{ i18n "view_details" }}</span>
+    </div>
+  </a>
+</article>

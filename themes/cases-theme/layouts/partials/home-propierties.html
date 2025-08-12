@@ -1,0 +1,5 @@
+{{- $limit := .limit | default 3 -}}
+{{- $site  := .Site -}}
+{{- range first (int $limit) (where $site.RegularPages "Section" "propietats") -}}
+  {{ partial "card-propietat.html" . }}
+{{- end -}}

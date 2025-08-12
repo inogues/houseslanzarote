@@ -1,0 +1,103 @@
+{{ define "main" }}
+<section class="contact-page">
+  <h1>{{ .Title }}</h1>
+
+  <!-- Texto libre desde el MD -->
+  <div class="contact-details">
+    {{ .Content }}
+  </div>
+
+  <!-- FORMULARIO -->
+  <form id="contact-form" action="https://formsubmit.co/inogues@gmail.com" method="POST" novalidate>
+    <!-- FormSubmit -->
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_subject" value="{{ i18n "form_subject_default" }}">
+
+    <!-- honeypot -->
+    <input type="text" name="_honey" style="display:none">
+
+    <label>{{ i18n "form_name" }}
+      <input type="text" name="nombre" required placeholder="{{ i18n "form_name_ph" }}">
+    </label>
+
+    <div class="row-2">
+      <label>{{ i18n "form_email" }}
+        <input type="email" name="email" required placeholder="you@example.com">
+      </label>
+      <label>{{ i18n "form_phone_whatsapp" }}
+        <input type="tel" name="telefono" placeholder="+34 619 234 405">
+      </label>
+    </div>
+
+    <label>{{ i18n "form_subject" }}
+      <input type="text" name="asunto" placeholder="{{ i18n "form_subject_ph" }}">
+    </label>
+
+    <label>{{ i18n "form_message" }}
+      <textarea name="mensaje" rows="6" placeholder="{{ i18n "form_message_ph" }}" required></textarea>
+    </label>
+
+    <button id="contact-submit" class="btn-primary" type="submit">
+      <i class="fa-solid fa-paper-plane"></i> {{ i18n "send_message" }}
+    </button>
+
+    <p id="contact-error" style="display:none;color:#b00020;margin:.5rem 0 0">
+      {{ i18n "form_error" }}
+    </p>
+  </form>
+
+  <!-- GRACIAS -->
+  <div id="thank-you" class="thank-you-message" style="display:none;">
+  <div class="ty-icon"><i class="fa-solid fa-circle-check"></i></div>
+  <h2>{{ i18n "form_thanks_title" }}</h2>
+  <p class="ty-text">{{ i18n "form_thanks_text" }}</p>
+  <a class="btn-secondary" href="{{ "propietats" | relLangURL }}">
+    <i class="fa-solid fa-house"></i> {{ i18n "view_properties" }}
+  </a>
+</div>
+</section>
+
+<script>
+(function () {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+  const btn  = document.getElementById('contact-submit');
+  const done = document.getElementById('thank-you');
+  const err  = document.getElementById('contact-error');
+  const sendingTxt = {{ printf "%q" (i18n "form_sending") }};
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    err.style.display = 'none';
+    btn.disabled = true;
+    const original = btn.innerHTML;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ' + sendingTxt;
+
+    try {
+      const resp = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (resp.ok) {
+  form.style.display = 'none';
+  done.style.display = 'block';
+  // activa l’animació
+  requestAnimationFrame(()=> done.classList.add('is-visible'));
+  // porta l’usuari al missatge
+  done.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}  else {
+        throw new Error('Bad response');
+      }
+    } catch (e) {
+      err.style.display = 'block';
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = original;
+    }
+  }, { passive: false });
+})();
+</script>
+{{ end }}

@@ -1,0 +1,92 @@
+{{ define "main" }}
+{{/* HERO de la sección (contenido de _index) */}}
+{{ with .Content }}<div class="container">{{ . }}</div>{{ end }}
+
+<div class="container prop-list">
+  <!-- Controles -->
+<form class="filters" id="filters" onsubmit="return false" aria-label="{{ i18n "filters" }}">
+  <input type="text" id="q" placeholder="{{ i18n "search_placeholder" }}">
+  <select id="zona" aria-label="{{ i18n "filter_zone" }}">
+    <option value="">{{ i18n "all_zones" }}</option>
+    <option value="playa blanca">Playa Blanca (Yaiza)</option>
+    <option value="puerto del carmen">Puerto del Carmen</option>
+  </select>
+
+  <!-- Amenidades: a sota, tota l’amplada -->
+  <details class="amenities-filter" open>
+    <summary><i class="fa-solid fa-sliders"></i> {{ i18n "filter_amenities" }}</summary>
+    <div class="amenities-grid">
+      {{ range .Site.Taxonomies.amenitats.Alphabetical }}
+        <label><input type="checkbox" name="amen" value="{{ .Name | lower }}"> {{ .Name }}</label>
+      {{ end }}
+    </div>
+  </details>
+</form>
+
+  <!-- Grid -->
+  <div class="grid" id="grid">
+    {{/* Pintamos tarjetas con metadatos para filtrar/ordenar */}}
+    {{ range $p := .Pages }}
+      {{ $zones := slice }} {{ with $p.Params.zona }}{{ $zones = apply . "lower" "." }}{{ end }}
+      {{ $amens := slice }} {{ with $p.Params.amenitats }}{{ $amens = apply . "lower" "." }}{{ end }}
+      <div class="card-wrapper"
+           data-title="{{ lower $p.Title }}"
+           data-summary="{{ lower (or $p.Params.summary "") }}"
+           data-zones="{{ delimit $zones "," }}"
+           data-amenities="{{ delimit $amens "," }}"
+           data-price="{{ or $p.Params.preu 0 }}"
+           data-capacity="{{ or $p.Params.capacitat 0 }}"
+           data-date="{{ $p.Date.Unix }}"
+           data-featured="{{ cond (eq (or $p.Params.featured false) true) "1" "0" }}">
+        {{ partial "card-propietat.html" $p }}
+      </div>
+    {{ end }}
+  </div>
+</div>
+
+<!-- JSON-LD ItemList (SEO) -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"ItemList",
+  "itemListElement": [
+    {{- $i := 0 -}}
+    {{- range $p := .Pages -}}
+      {{- $i = add $i 1 -}}
+      {
+        "@type":"ListItem",
+        "position": {{ $i }},
+        "url": "{{ $p.Permalink }}"
+      }{{ if lt $i (len $.Pages) }},{{ end }}
+    {{- end -}}
+  ]
+}
+</script>
+
+<!-- Filtro + orden JS -->
+<script>
+(function(){
+  const $q = document.getElementById('q');
+  const $zona = document.getElementById('zona');
+  const $amen = Array.from(document.querySelectorAll('input[name="amen"]'));
+  const $cards = Array.from(document.querySelectorAll('.card-wrapper'));
+
+  function passesFilters(card){
+    const q = ($q.value||'').trim().toLowerCase();
+    const z = ($zona.value||'').trim().toLowerCase();
+    const a = $amen.filter(x=>x.checked).map(x=>x.value);
+    const zones = (card.dataset.zones||'').split(',').filter(Boolean);
+    const amens = (card.dataset.amenities||'').split(',').filter(Boolean);
+    const t = card.dataset.title||'', s = card.dataset.summary||'';
+    return (!q || t.includes(q) || s.includes(q))
+        && (!z || zones.includes(z))
+        && (!a.length || a.every(v=>amens.includes(v)));
+  }
+
+  function apply(){ $cards.forEach(c=>{ c.style.display = passesFilters(c)?'':'none'; }); }
+  $q.addEventListener('input', apply);
+  $zona.addEventListener('change', apply);
+  $amen.forEach(x=>x.addEventListener('change', apply));
+})();
+</script>
+{{ end }}

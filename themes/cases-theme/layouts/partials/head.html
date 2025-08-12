@@ -1,0 +1,17 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}</title>
+<meta name="description" content="{{ with .Params.summary }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}">
+{{ with .Params.imatges }}<meta property="og:image" content="{{ index . 0 }}">{{ end }}
+<link rel="stylesheet" href="/css/styles.css">
+
+<!-- hreflang -->
+<link rel="alternate" hreflang="{{ .Site.LanguageCode }}" href="{{ .Permalink }}">
+{{ range .AllTranslations }}
+  <link rel="alternate" hreflang="{{ .Site.LanguageCode }}" href="{{ .Permalink }}">
+{{ end }}
+<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+
+<!-- GLightbox CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">

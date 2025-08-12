@@ -1,0 +1,21 @@
+{{- with .Params.trust_band -}}
+<section class="trust-band container">
+  {{- range . -}}
+    {{- $t := lower . -}}
+    {{- /* Heurística d'icones multiidioma (ES/EN/FR/DE) */ -}}
+    {{- $icon := "fa-check" -}}
+    {{- if or (in $t "ubic") (in $t "location") (in $t "localis") (in $t "lage") (in $t "playa blanca") (in $t "puerto del carmen") -}}
+      {{- $icon = "fa-location-dot" -}}
+    {{- end -}}
+    {{- if or (in $t "limp") (in $t "clean") (in $t "propreté") (in $t "sauber") (in $t "equip") (in $t "equipamiento") -}}
+      {{- $icon = "fa-broom" -}}
+    {{- end -}}
+    {{- if or (in $t "whatsapp") (in $t "email") (in $t "correo") (in $t "contact") (in $t "atención") (in $t "attention") (in $t "kontakt") -}}
+      {{- $icon = "fa-comments" -}}
+    {{- end -}}
+    <div class="band-item">
+      <i class="fa-solid {{ $icon }}"></i> {{ . }}
+    </div>
+  {{- end -}}
+</section>
+{{- end -}}

@@ -1,0 +1,112 @@
+- id: nav_properties
+  translation: "Propiedades"
+- id: nav_about
+  translation: "Sobre nosotros"
+- id: nav_contact
+  translation: "Contacto"
+- id: from_price
+  translation: "Desde"
+- id: per_night
+  translation: "/noche"
+- id: capacity
+  translation: "Capacidad"
+- id: bedrooms
+  translation: "Dormitorios"
+- id: bathrooms
+  translation: "Baños"
+- id: area_m2
+  translation: "Superficie"
+- id: amenities
+  translation: "Servicios"
+- id: book
+  translation: "Reservar"
+- id: send_request
+  translation: "Enviar solicitud"
+- id: search_placeholder
+  translation: "Buscar por título o resumen"
+- id: all_zones
+  translation: "Todas las zonas"
+- id: location
+  translation: "Ubicación"
+- id: map
+  translation: "Mapa"
+- id: book_now
+  translation: "Reservar ahora"
+- id: reserve
+  translation: "Reservar"
+- id: form_name
+  translation: "Nombre"
+- id: form_email
+  translation: "Email"
+- id: form_checkin
+  translation: "Entrada"
+- id: form_checkout
+  translation: "Salida"
+- id: form_message
+  translation: "Mensaje"
+- id: form_message_ph
+  translation: "Cuéntanos fechas y número de personas…"
+- id: contact_phone
+  translation: "+34 619 234 405"
+- id: contact_email
+  translation: "info@housesinlanzarote.org"
+- id: filters
+  translation: "Filtros"
+- id: filter_zone
+  translation: "Zona"
+- id: filter_amenities
+  translation: "Amenidades (todas)"
+- id: sort_by
+  translation: "Ordenar por"
+- id: sort_featured
+  translation: "Destacadas primero"
+- id: sort_price_asc
+  translation: "Precio ↑"
+- id: sort_price_desc
+  translation: "Precio ↓"
+- id: sort_capacity
+  translation: "Capacidad"
+- id: sort_newest
+  translation: "Más recientes"
+- id: featured
+  translation: "Destacado"
+- id: view_details
+  translation: "Ver detalles"
+- id: form_subject_default
+  translation: "Nuevo mensaje desde la web"
+- id: form_name
+  translation: "Nombre"
+- id: form_name_ph
+  translation: "Tu nombre"
+- id: form_email
+  translation: "Email"
+- id: form_phone_whatsapp
+  translation: "Teléfono / WhatsApp"
+- id: form_subject
+  translation: "Asunto"
+- id: form_subject_ph
+  translation: "Reserva, disponibilidad, información…"
+- id: form_message
+  translation: "Mensaje"
+- id: form_message_ph
+  translation: "Cuéntanos fechas, personas y cualquier preferencia."
+- id: send_message
+  translation: "Enviar mensaje"
+- id: form_sending
+  translation: "Enviando…"
+- id: form_error
+  translation: "Hubo un error. Inténtalo de nuevo."
+- id: form_thanks_title
+  translation: "¡Gracias por tu mensaje!"
+- id: form_thanks_text
+  translation: "Te responderemos lo antes posible. Mientras tanto, puedes ver nuestras propiedades."
+- id: view_properties
+  translation: "Ver propiedades"
+- id: form_thanks_title
+  translation: "¡Gracias por tu mensaje!"
+- id: form_thanks_text
+  translation: "Te responderemos lo antes posible. Mientras tanto, puedes ver nuestras propiedades."
+- id: form_error
+  translation: "Hubo un error. Inténtalo de nuevo."
+- id: view_properties
+  translation: "Ver propiedades"

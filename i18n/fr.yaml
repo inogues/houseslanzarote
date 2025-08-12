@@ -1,0 +1,94 @@
+- id: nav_properties
+  translation: "Propriétés"
+- id: nav_about
+  translation: "À propos"
+- id: nav_contact
+  translation: "Contact"
+- id: from_price
+  translation: "À partir de"
+- id: per_night
+  translation: "/nuit"
+- id: capacity
+  translation: "Capacité"
+- id: bedrooms
+  translation: "Chambres"
+- id: bathrooms
+  translation: "Salles de bain"
+- id: area_m2
+  translation: "Surface"
+- id: amenities
+  translation: "Équipements"
+- id: book
+  translation: "Réserver"
+- id: send_request
+  translation: "Envoyer la demande"
+- id: search_placeholder
+  translation: "Rechercher par titre ou résumé"
+- id: all_zones
+  translation: "Toutes les zones"
+- id: location
+  translation: "Localisation"
+- id: map
+  translation: "Carte"
+- id: book_now
+  translation: "Réserver maintenant"
+- id: reserve
+  translation: "Réserver"
+- id: form_name
+  translation: "Nom"
+- id: form_email
+  translation: "E‑mail"
+- id: form_checkin
+  translation: "Arrivée"
+- id: form_checkout
+  translation: "Départ"
+- id: form_message
+  translation: "Message"
+- id: form_message_ph
+  translation: "Indiquez-nous les dates et le nombre de personnes…"
+- id: contact_phone
+  translation: "+34 619 234 405"
+- id: contact_email
+  translation: "info@housesinlanzarote.org"
+- id: form_subject_default
+  translation: "Nouveau message depuis le site"
+- id: form_name
+  translation: "Nom"
+- id: form_name_ph
+  translation: "Votre nom"
+- id: form_email
+  translation: "Email"
+- id: form_phone_whatsapp
+  translation: "Téléphone / WhatsApp"
+- id: form_subject
+  translation: "Objet"
+- id: form_subject_ph
+  translation: "Réservation, disponibilité, informations…"
+- id: form_message
+  translation: "Message"
+- id: form_message_ph
+  translation: "Indiquez-nous dates, personnes et préférences."
+- id: send_message
+  translation: "Envoyer"
+- id: form_sending
+  translation: "Envoi…"
+- id: form_error
+  translation: "Une erreur s’est produite. Réessayez."
+- id: form_thanks_title
+  translation: "Merci pour votre message !"
+- id: form_thanks_text
+  translation: "Nous vous répondrons rapidement. En attendant, découvrez nos propriétés."
+- id: view_properties
+  translation: "Voir les propriétés"
+- id: form_thanks_title
+  translation: "Merci pour votre message !"
+- id: form_thanks_text
+  translation: "Nous vous répondrons dès que possible. En attendant, vous pouvez consulter nos propriétés."
+- id: form_error
+  translation: "Une erreur s'est produite. Veuillez réessayer."
+- id: view_properties
+  translation: "Voir les propriétés"
+- id: filter_amenities
+  translation: "Équipements (tous)"
+- id: view_details
+  translation: "Voir les détails"

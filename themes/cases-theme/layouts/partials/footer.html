@@ -1,0 +1,19 @@
+<footer class="site-footer">
+  <p>© {{ now.Year }} {{ .Site.Params.owner }}</p>
+  <p>{{ .Site.Params.address }} · <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a> · {{ .Site.Params.phone }}</p>
+</footer>
+
+<!-- GLightbox JS -->
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    GLightbox({
+      selector: '.glightbox',
+      loop: true,
+      touchNavigation: true,
+      openEffect: 'zoom',
+      slideEffect: 'fade',
+      closeOnOutsideClick: true
+    });
+  });
+</script>

@@ -1,0 +1,54 @@
+{{/* Galería universal: usa .Params.imatges (strings) -> .Params.gallery [{src,alt}] -> .Resources */}}
+
+{{ $p := . }}
+{{ $count := 0 }}
+
+{{ if .Params.imatges }}
+  <div class="gallery grid">
+    {{ range $i, $src := .Params.imatges }}
+      {{ $alt := printf "%s — foto %d" $p.Title (add $i 1) }}
+      <a class="glightbox"
+         href="{{ $src }}"
+         data-gallery="prop-{{ $p.File.BaseFileName }}"
+         data-title="{{ $alt }}">
+        <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+      </a>
+      {{ $count = add $count 1 }}
+    {{ end }}
+  </div>
+
+{{ else if .Params.gallery }}
+  <div class="gallery grid">
+    {{ range $i, $img := .Params.gallery }}
+      {{ $src := $img.src }}
+      {{ $alt := cond (isset $img "alt") $img.alt (printf "%s — foto %d" $p.Title (add $i 1)) }}
+      <a class="glightbox"
+         href="{{ $src }}"
+         data-gallery="prop-{{ $p.File.BaseFileName }}"
+         data-title="{{ $alt }}">
+        <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+      </a>
+      {{ $count = add $count 1 }}
+    {{ end }}
+  </div>
+
+{{ else if .Resources }}
+  {{ $imgs := .Resources.ByType "image" }}
+  {{ if gt (len $imgs) 0 }}
+    <div class="gallery grid">
+      {{ range $i, $res := $imgs }}
+        {{ $src := $res.RelPermalink }}
+        {{ $alt := printf "%s — foto %d" $p.Title (add $i 1) }}
+        <a class="glightbox"
+           href="{{ $src }}"
+           data-gallery="prop-{{ $p.File.BaseFileName }}"
+           data-title="{{ $alt }}">
+          <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+        </a>
+        {{ $count = add $count 1 }}
+      {{ end }}
+    </div>
+  {{ end }}
+{{ end }}
+
+{{/* Si no hubo imágenes, no pinta nada. */}}

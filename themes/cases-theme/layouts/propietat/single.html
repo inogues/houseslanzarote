@@ -1,0 +1,172 @@
+{{ define "main" }}
+{{ $cover := .Params.cover }}
+
+
+
+<article class="propietat">
+
+  <!-- HERO -->
+  <section class="prop-hero" style="{{ if $cover }}background-image:url('{{ $cover }}'){{ end }}">
+    <div class="prop-hero__overlay"></div>
+    <div class="prop-hero__inner container">
+      <div class="prop-hero__text">
+        <h1>{{ .Title }}</h1>
+        <div class="prop-hero__meta">
+          {{ with .Params.zona }}
+            <span class="pill"><i class="fa-solid fa-location-dot"></i> {{ i18n "location" }}: {{ delimit . ", " }}</span>
+          {{ end }}
+          {{ with .Params.superficie }}
+            <span class="pill"><i class="fa-solid fa-ruler-combined"></i> {{ i18n "area_m2" }}: {{ . }} m²</span>
+          {{ end }}
+          {{ with .Params.preu }}
+            <span class="pill -price"><i class="fa-solid fa-tag"></i> {{ i18n "from_price" }} {{ . }}{{ $.Site.Params.currency }}{{ i18n "per_night" }}</span>
+          {{ end }}
+        </div>
+        <a class="btn-primary" href="#reserva"><i class="fa-solid fa-calendar-check"></i> {{ i18n "book_now" }}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENIDO -->
+  <div class="container prop-layout">
+
+
+    <!-- FEATURES TOP -->
+    <section class="features">
+      <div class="feature"><i class="fa-solid fa-users"></i> <strong>{{ i18n "capacity" }}</strong> {{ .Params.capacitat | default 0 }}</div>
+      <div class="feature"><i class="fa-solid fa-bed"></i> <strong>{{ i18n "bedrooms" }}</strong> {{ .Params.habitacions | default 0 }}</div>
+      <div class="feature"><i class="fa-solid fa-bath"></i> <strong>{{ i18n "bathrooms" }}</strong> {{ .Params.banys | default 0 }}</div>
+      {{ with .Params.superficie }}
+      <div class="feature"><i class="fa-solid fa-ruler-combined"></i> <strong>{{ i18n "area_m2" }}</strong> {{ . }} m²</div>
+      {{ end }}
+    </section>
+
+    <!-- DESCRIPCIÓN + RESERVA STICKY -->
+    <div class="prop-two-col">
+      <section class="descripcio">
+        {{ .Content }}
+
+        <!-- AMENIDADES con iconos -->
+        {{ $iconMap := dict
+          "wifi" "fa-wifi"
+          "piscina" "fa-person-swimming"
+          "piscina climatizada" "fa-temperature-three-quarters"
+          "jacuzzi" "fa-hot-tub-person"
+          "aire acondicionado" "fa-fan"
+          "aparcamiento privado" "fa-square-parking"
+          "aparcamiento" "fa-square-parking"
+          "barbacoa" "fa-fire-burner"
+          "jardín" "fa-leaf"
+          "terraza" "fa-umbrella-beach"
+          "cocina" "fa-kitchen-set"
+          "cocina equipada" "fa-kitchen-set"
+          "lavadora" "fa-soap"
+          "secador" "fa-wind"
+          "smart tv" "fa-tv"
+          "tv" "fa-tv"
+          "vistas al mar" "fa-water"
+        }}
+
+        <div class="amenitats">
+          <h3><i class="fa-solid fa-list-check"></i> {{ i18n "amenities" }}</h3>
+          <ul class="amenity-chips">
+            {{ range .Params.amenitats }}
+              {{ $raw := . }}
+              {{ $key := lower $raw }}
+              {{ $icon := index $iconMap $key | default "fa-circle-check" }}
+              <li><i class="fa-solid {{ $icon }}"></i> {{ $raw }}</li>
+            {{ end }}
+          </ul>
+        </div>
+
+        <!-- MAPA -->
+        {{ with .Params.coords }}
+        <div class="map-wrap">
+          <h3><i class="fa-solid fa-map-location-dot"></i> {{ i18n "map" }}</h3>
+          <iframe
+            src="https://www.google.com/maps?q={{ .lat }},{{ .lng }}&hl={{ $.Site.LanguageCode }}&z=14&output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        {{ end }}
+
+            <!-- GALERÍA -->
+            <section>
+      {{ partial "gallery.html" . }}
+    </section>
+      </section>
+
+      <!-- PANEL RESERVA (sticky) -->
+      <!-- PANEL RESERVA (sticky) -->
+<aside id="reserva" class="reserva-card">
+  <div class="reserva-card__price">
+    <div class="from">{{ i18n "from_price" }}</div>
+    <div class="amount">{{ .Params.preu | default 0 }}{{ .Site.Params.currency }}<span>{{ i18n "per_night" }}</span></div>
+  </div>
+
+  <form id="reserva-form">
+    <label>{{ i18n "form_name" }}
+      <input type="text" name="nom" required>
+    </label>
+
+    <div class="row-2">
+      <label>{{ i18n "form_checkin" }}
+        <input type="date" name="checkin" required>
+      </label>
+      <label>{{ i18n "form_checkout" }}
+        <input type="date" name="checkout" required>
+      </label>
+    </div>
+
+    <label>{{ i18n "form_email" }}
+      <input type="email" name="email" required>
+    </label>
+
+    <label>{{ i18n "form_message" }}
+      <textarea name="missatge" rows="4" placeholder="{{ i18n "form_message_ph" }}"></textarea>
+    </label>
+
+    <button class="btn-primary btn-full" type="submit">
+      <i class="fa-solid fa-paper-plane"></i> {{ i18n "send_request" }}
+    </button>
+
+    <div class="contact-inline">
+      <a href="tel:+34619234405"><i class="fa-solid fa-phone"></i> {{ i18n "contact_phone" }}</a>
+      <a href="mailto:info@housesinlanzarote.org"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+    </div>
+  </form>
+
+  <div id="reserva-success" class="form-success" style="display:none;">
+    <h3>{{ i18n "form_thanks_title" }}</h3>
+    <p>{{ i18n "form_thanks_text" }}</p>
+    <a class="btn-primary" href="/{{ .Site.Language.Lang }}/propietats/">{{ i18n "view_properties" }}</a>
+  </div>
+</aside>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("reserva-form");
+  const successBox = document.getElementById("reserva-success");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    fetch("https://formspree.io/f/tu-endpoint", {
+      method: "POST",
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if (response.ok) {
+        form.style.display = "none";
+        successBox.style.display = "block";
+      } else {
+        alert("{{ i18n `form_error` }}");
+      }
+    }).catch(() => alert("{{ i18n `form_error` }}"));
+  });
+});
+</script>
+    </div>
+  </div>
+
+</article>
+{{ end }}

@@ -1,0 +1,94 @@
+- id: nav_properties
+  translation: "Unterkünfte"
+- id: nav_about
+  translation: "Über uns"
+- id: nav_contact
+  translation: "Kontakt"
+- id: from_price
+  translation: "Ab"
+- id: per_night
+  translation: "/Nacht"
+- id: capacity
+  translation: "Kapazität"
+- id: bedrooms
+  translation: "Schlafzimmer"
+- id: bathrooms
+  translation: "Bäder"
+- id: area_m2
+  translation: "Fläche"
+- id: amenities
+  translation: "Ausstattung"
+- id: book
+  translation: "Buchen"
+- id: send_request
+  translation: "Anfrage senden"
+- id: search_placeholder
+  translation: "Suche nach Titel oder Zusammenfassung"
+- id: all_zones
+  translation: "Alle Zonen"
+- id: location
+  translation: "Lage"
+- id: map
+  translation: "Karte"
+- id: book_now
+  translation: "Jetzt buchen"
+- id: reserve
+  translation: "Reservieren"
+- id: form_name
+  translation: "Name"
+- id: form_email
+  translation: "E‑Mail"
+- id: form_checkin
+  translation: "Anreise"
+- id: form_checkout
+  translation: "Abreise"
+- id: form_message
+  translation: "Nachricht"
+- id: form_message_ph
+  translation: "Teilen Sie uns Daten und Personenzahl mit…"
+- id: contact_phone
+  translation: "+34 619 234 405"
+- id: contact_email
+  translation: "info@housesinlanzarote.org"
+- id: form_subject_default
+  translation: "Neue Nachricht von der Website"
+- id: form_name
+  translation: "Name"
+- id: form_name_ph
+  translation: "Ihr Name"
+- id: form_email
+  translation: "E-Mail"
+- id: form_phone_whatsapp
+  translation: "Telefon / WhatsApp"
+- id: form_subject
+  translation: "Betreff"
+- id: form_subject_ph
+  translation: "Buchung, Verfügbarkeit, Information…"
+- id: form_message
+  translation: "Nachricht"
+- id: form_message_ph
+  translation: "Teilen Sie uns Termine, Gäste und Wünsche mit."
+- id: send_message
+  translation: "Nachricht senden"
+- id: form_sending
+  translation: "Senden…"
+- id: form_error
+  translation: "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+- id: form_thanks_title
+  translation: "Danke für Ihre Nachricht!"
+- id: form_thanks_text
+  translation: "Wir melden uns in Kürze. In der Zwischenzeit sehen Sie sich unsere Unterkünfte an."
+- id: view_properties
+  translation: "Unterkünfte ansehen"
+- id: form_thanks_title
+  translation: "Danke für Ihre Nachricht!"
+- id: form_thanks_text
+  translation: "Wir werden uns so schnell wie möglich bei Ihnen melden. In der Zwischenzeit können Sie unsere Unterkünfte ansehen."
+- id: form_error
+  translation: "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+- id: view_properties
+  translation: "Unterkünfte ansehen"
+- id: filter_amenities
+  translation: "Ausstattung (alle)"
+- id: view_details
+  translation: "Details anzeigen"

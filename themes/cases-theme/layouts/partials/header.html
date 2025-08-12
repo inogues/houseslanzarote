@@ -1,0 +1,21 @@
+<header class="site-header">
+  <a href="{{ .Site.BaseURL }}" class="site-logo">
+  <img src="{{ .Site.Params.logo }}" alt="{{ .Site.Title }}">
+</a>
+
+<nav class="main-nav">
+  {{ $current := . }} {{/* la pàgina actual */}}
+  {{ range .Site.Menus.main }}
+    {{/* actiu si el page actual apunta a aquesta entrada o si la URL coincideix */}}
+    {{ $active := or
+        ($current.IsMenuCurrent "main" .)
+        ($current.HasMenuCurrent "main" .)
+        (and .Page (eq .Page.RelPermalink $current.RelPermalink))
+        (eq (relLangURL .URL) (relLangURL $current.RelPermalink))
+    }}
+    <a href="{{ .URL | relLangURL }}" class="{{ if $active }}active{{ end }}">{{ .Name }}</a>
+  {{ end }}
+</nav>
+
+{{ partial "lang-switcher.html" . }}
+</header>
