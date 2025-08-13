@@ -24,7 +24,7 @@ enableRobotsTXT = true
 # Paràmetres globals (pots sobreescriure'ls per idioma a [languages.xx.params])
 [params]
   currency = "€"
-  logo = "/img/logo.png"
+  logo = "/img/logo.webp"
   formsubmit = "https://formsubmit.co/housesinlanzarote@prois.es"
 
 [params.analytics]

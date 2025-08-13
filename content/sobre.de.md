@@ -4,20 +4,20 @@ slug: "about"
 summary: "Ihr Ferienhaus im Herzen von Lanzarote"
 type: "page"
 draft: false
-cover: "/img/lanzarote-vista-la-graciosa.jpg"
+cover: "/img/lanzarote-vista-la-graciosa.webp"
 gallery:
-  - { src: '/img/lanzarote-carretera-timanfaya.jpg', alt: 'Straße nach Timanfaya, Lanzarote' }
-  - { src: '/img/lanzarote-surf-playa-famara.jpg', alt: 'Surfer am Strand von Famara, Lanzarote' }
-  - { src: '/img/lanzarote-barca-costa-famara.jpg', alt: 'Traditionelles Boot an der Nordküste von Lanzarote' }
-  - { src: '/img/lanzarote-playa-blanca-aerea.jpg', alt: 'Luftaufnahme von Playa Blanca, Lanzarote' }
-  - { src: '/img/lanzarote-isla-graciosa.jpg', alt: 'Panoramablick auf La Graciosa von Lanzarote aus' }
-  - { src: '/img/lanzarote-playa-dorada.jpg', alt: 'Playa Dorada in Playa Blanca, Lanzarote' }
-  - { src: '/img/lanzarote-vista-la-graciosa.jpg', alt: 'Blick auf La Graciosa vom Mirador del Río' }
-  - { src: '/img/lanzarote-cueva-verdes.jpg', alt: 'Eingang zur Cueva de los Verdes, Lanzarote' }
-  - { src: '/img/lanzarote-la-geria-vinedos.jpg', alt: 'Weinberge in La Geria, Lanzarote' }
-  - { src: '/img/lanzarote-salinas-janubio.jpg', alt: 'Salinas de Janubio, Lanzarote' }
-  - { src: '/img/lanzarote-lago-verde.jpg', alt: 'Lago de los Verdes, Lanzarote' }
-  - { src: '/img/lanzarote-famara.jpg', alt: 'Caleta de Famara, Lanzarote' }
+  - { src: '/img/lanzarote-carretera-timanfaya.webp', alt: 'Straße nach Timanfaya, Lanzarote' }
+  - { src: '/img/lanzarote-surf-playa-famara.webp', alt: 'Surfer am Strand von Famara, Lanzarote' }
+  - { src: '/img/lanzarote-barca-costa-famara.webp', alt: 'Traditionelles Boot an der Nordküste von Lanzarote' }
+  - { src: '/img/lanzarote-playa-blanca-aerea.webp', alt: 'Luftaufnahme von Playa Blanca, Lanzarote' }
+  - { src: '/img/lanzarote-isla-graciosa.webp', alt: 'Panoramablick auf La Graciosa von Lanzarote aus' }
+  - { src: '/img/lanzarote-playa-dorada.webp', alt: 'Playa Dorada in Playa Blanca, Lanzarote' }
+  - { src: '/img/lanzarote-vista-la-graciosa.webp', alt: 'Blick auf La Graciosa vom Mirador del Río' }
+  - { src: '/img/lanzarote-cueva-verdes.webp', alt: 'Eingang zur Cueva de los Verdes, Lanzarote' }
+  - { src: '/img/lanzarote-la-geria-vinedos.webp', alt: 'Weinberge in La Geria, Lanzarote' }
+  - { src: '/img/lanzarote-salinas-janubio.webp', alt: 'Salinas de Janubio, Lanzarote' }
+  - { src: '/img/lanzarote-lago-verde.webp', alt: 'Lago de los Verdes, Lanzarote' }
+  - { src: '/img/lanzarote-famara.webp', alt: 'Caleta de Famara, Lanzarote' }
 
 cta_title: "Bereit für Ihren Urlaub auf Lanzarote?"
 cta_text: "Wir helfen Ihnen, die perfekte Unterkunft im Süden der Insel zu finden: Playa Blanca und Puerto del Carmen."
