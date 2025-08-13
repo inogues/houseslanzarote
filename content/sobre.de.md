@@ -24,7 +24,7 @@ cta_text: "Wir helfen Ihnen, die perfekte Unterkunft im Süden der Insel zu find
 cta_primary_label: "Unterkünfte ansehen"
 cta_primary_url: "/de/propietats/"
 cta_secondary_label: "Schreiben Sie uns"
-cta_secondary_url: "mailto:info@housesinlanzarote.eu"
+cta_secondary_url: "mailto:housesinlanzarote@prois.es"
 ---
 
 ## Mehr als nur Unterkunft: Erfahrung und Leidenschaft für Lanzarote

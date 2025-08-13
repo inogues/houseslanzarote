@@ -1,6 +1,11 @@
 <footer class="site-footer">
   <p>© {{ now.Year }} {{ .Site.Params.owner }}</p>
   <p>{{ .Site.Params.address }} · <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a> · {{ .Site.Params.phone }}</p>
+  <p class="legal-links">
+      <a href='{{ relref . "legal/politica-cookies" }}'>{{ i18n "cookie_policy" }}</a> ·
+      <a href='{{ relref . "legal/politica-privacidad" }}'>{{ i18n "privacy_policy" }}</a> ·
+      <a href='{{ relref . "legal/politica-accesibilidad" }}'>{{ i18n "accessibility_policy" }}</a>
+  </p>
 </footer>
 
 <script>

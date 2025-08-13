@@ -6,6 +6,6 @@ draft: false
 ---
 
 <i class="fa-brands fa-whatsapp"></i> **+34 619 234 405**  
-<i class="fa-solid fa-envelope"></i> **info@housesinlanzarote.org**  
+<i class="fa-solid fa-envelope"></i> **housesinlanzarote@prois.es**  
 
 Sie können uns schreiben oder das Formular nutzen, um eine schnelle Antwort zu erhalten.

@@ -24,7 +24,7 @@ cta_text: "Te ayudamos a elegir la propiedad perfecta en el sur de la isla: Play
 cta_primary_label: "Ver propiedades"
 cta_primary_url: "/es/propietats/"
 cta_secondary_label: "Escríbenos"
-cta_secondary_url: "mailto:info@housesinlanzarote.eu"
+cta_secondary_url: "mailto:housesinlanzarote@prois.es"
 ---
 
 ## Mucho más que alojamiento: experiencia y pasión por Lanzarote

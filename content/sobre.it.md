@@ -24,7 +24,7 @@ cta_text: "Ti aiutiamo a scegliere la proprietà perfetta nel sud dell'isola: Pl
 cta_primary_label: "Vedi proprietà"
 cta_primary_url: "/it/propietats/"
 cta_secondary_label: "Scrivici"
-cta_secondary_url: "mailto:info@housesinlanzarote.eu"
+cta_secondary_url: "mailto:housesinlanzarote@prois.es"
 ---
 
 ## Molto più di un alloggio: esperienza e passione per Lanzarote

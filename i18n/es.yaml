@@ -118,3 +118,13 @@
   translation: "Aceptar cookies"
 - id: cookie_reject
   translation: "Solo esenciales"
+- id: cookie_policy_link
+  translation: "Leer la política de cookies"
+- id: cookie_policy
+  translation: "Política de cookies"
+- id: privacy_policy
+  translation: "Política de privacidad"
+- id: accessibility_policy
+  translation: "Política de accesibilidad"
+- id: more_info
+  translation: "Más información"

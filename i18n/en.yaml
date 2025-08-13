@@ -100,3 +100,13 @@
   translation: "Accept cookies"
 - id: cookie_reject
   translation: "Essentials only"
+- id: cookie_policy
+  translation: "Cookie Policy"
+- id: privacy_policy
+  translation: "Privacy Policy"
+- id: accessibility_policy
+  translation: "Accessibility Policy"
+- id: more_info
+  translation: "More information"
+- id: cookie_policy_link
+  translation: "Read the cookie policy"

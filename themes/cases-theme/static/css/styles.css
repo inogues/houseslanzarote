@@ -802,3 +802,26 @@ blockquote em {
   .cookie-actions{ justify-content: stretch; }
   .cookie-actions .btn-primary, .cookie-actions .btn-secondary{ flex:1; text-align:center; }
 }
+
+.cookie-link a {
+  color: #fff;
+  text-decoration: underline;
+}
+.cookie-link a:hover {
+  text-decoration: none;
+}
+
+.site-footer .legal-links a {
+  font-size: 0.85rem; /* lleugerament més petit */
+  color: inherit; /* mantenim el color original */
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
+
+.site-footer .legal-links a:hover {
+  text-decoration: underline;
+}
+
+.site-footer .legal-links {
+  font-size: 0.85rem; /* també afecta si tens text fora dels <a> */
+}

@@ -5,6 +5,11 @@
     <div class="cookie-text">
       <strong>{{ i18n "cookie_title" }}</strong>
       <p>{{ i18n "cookie_text" }}</p>
+      <p class="cookie-link">
+        <a href="{{ relref . "legal/politica-cookies" }}" target="_blank" rel="noopener">
+          {{ i18n "cookie_policy_link" }}
+        </a>
+      </p>
     </div>
     <div class="cookie-actions">
       <button id="cookie-accept" class="btn-primary">{{ i18n "cookie_accept" }}</button>
@@ -28,10 +33,7 @@
   function hide(){ banner.hidden = true; banner.classList.remove('is-visible'); }
   function show(){ banner.hidden = false; requestAnimationFrame(()=>banner.classList.add('is-visible')); }
 
-  // Mostrar si no hay elección
   if(!hasChoice()){ show(); }
-
-  // Si ya aceptó en visitas anteriores, carga analytics
   if(hasChoice() && getChoice() && window.__loadAnalytics){ window.__loadAnalytics(); }
 
   acceptBtn && acceptBtn.addEventListener('click', function(){
@@ -41,7 +43,6 @@
 
   rejectBtn && rejectBtn.addEventListener('click', function(){
     localStorage.setItem(KEY, 'essential'); hide();
-    // no cargamos analytics
   });
 })();
 </script>

@@ -116,3 +116,13 @@
   translation: "Accetta i cookie"
 - id: cookie_reject
   translation: "Solo essenziali"
+- id: cookie_policy
+  translation: "Informativa sui cookie"
+- id: privacy_policy
+  translation: "Informativa sulla privacy"
+- id: accessibility_policy
+  translation: "Politica di accessibilità"
+- id: more_info
+  translation: "Maggiori informazioni"
+- id: cookie_policy_link
+  translation: "Leggi l'informativa sui cookie"
