@@ -92,3 +92,11 @@
   translation: "Amenities (all)"
 - id: view_details
   translation: "View details"
+- id: cookie_title
+  translation: "Your privacy"
+- id: cookie_text
+  translation: "We use cookies only for anonymous analytics. You can accept or continue with essentials only."
+- id: cookie_accept
+  translation: "Accept cookies"
+- id: cookie_reject
+  translation: "Essentials only"

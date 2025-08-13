@@ -110,3 +110,11 @@
   translation: "Hubo un error. Inténtalo de nuevo."
 - id: view_properties
   translation: "Ver propiedades"
+- id: cookie_title
+  translation: "Tu privacidad"
+- id: cookie_text
+  translation: "Usamos cookies solo para estadísticas anónimas. Puedes aceptar o continuar con solo las esenciales."
+- id: cookie_accept
+  translation: "Aceptar cookies"
+- id: cookie_reject
+  translation: "Solo esenciales"

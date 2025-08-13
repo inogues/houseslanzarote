@@ -1,9 +1,14 @@
 <header class="site-header">
-  <a href="{{ .Site.BaseURL }}" class="site-logo">
+  <a href="{{ "/" | relLangURL }}" class="site-logo">
   <img src="{{ .Site.Params.logo }}" alt="{{ .Site.Title }}">
 </a>
 
-<nav class="main-nav">
+<button class="nav-toggle" aria-expanded="false" aria-controls="main-menu">
+    <span class="sr-only">Menu</span>
+    <i class="fa-solid fa-bars"></i>
+</button>
+
+<nav id="main-menu" class="main-nav">
   {{ $current := . }} {{/* la pàgina actual */}}
   {{ range .Site.Menus.main }}
     {{/* actiu si el page actual apunta a aquesta entrada o si la URL coincideix */}}

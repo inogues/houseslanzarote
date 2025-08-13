@@ -4,7 +4,7 @@ slug: "a-propos"
 summary: "Votre maison de vacances au cœur de Lanzarote"
 type: "page"
 draft: false
-cover: "/img/hero-lanzarote.jpg"
+cover: "/img/lanzarote-vista-la-graciosa.jpg"
 gallery:
   - { src: '/img/lanzarote-carretera-timanfaya.jpg', alt: 'Route vers Timanfaya, Lanzarote' }
   - { src: '/img/lanzarote-surf-playa-famara.jpg', alt: 'Surfeur à la plage de Famara, Lanzarote' }

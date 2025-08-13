@@ -92,3 +92,11 @@
   translation: "Équipements (tous)"
 - id: view_details
   translation: "Voir les détails"
+- id: cookie_title
+  translation: "Votre confidentialité"
+- id: cookie_text
+  translation: "Nous utilisons des cookies uniquement pour des statistiques anonymes. Vous pouvez accepter ou rester sur l’essentiel."
+- id: cookie_accept
+  translation: "Accepter les cookies"
+- id: cookie_reject
+  translation: "Essentiels uniquement"

@@ -92,3 +92,11 @@
   translation: "Ausstattung (alle)"
 - id: view_details
   translation: "Details anzeigen"
+- id: cookie_title
+  translation: "Deine Privatsphäre"
+- id: cookie_text
+  translation: "Wir verwenden Cookies nur für anonyme Statistiken. Du kannst zustimmen oder nur essenzielle erlauben."
+- id: cookie_accept
+  translation: "Cookies akzeptieren"
+- id: cookie_reject
+  translation: "Nur Essenzielle"

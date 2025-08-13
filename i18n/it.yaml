@@ -108,3 +108,11 @@
   translation: "Servizi (tutti)"
 - id: view_details
   translation: "Vedi dettagli"
+- id: cookie_title
+  translation: "La tua privacy"
+- id: cookie_text
+  translation: "Usiamo cookie solo per statistiche anonime. Puoi accettare o continuare con soli essenziali."
+- id: cookie_accept
+  translation: "Accetta i cookie"
+- id: cookie_reject
+  translation: "Solo essenziali"

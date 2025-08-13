@@ -3,6 +3,22 @@
   <p>{{ .Site.Params.address }} · <a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a> · {{ .Site.Params.phone }}</p>
 </footer>
 
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  const btn=document.querySelector('.nav-toggle');
+  const menu=document.getElementById('main-menu');
+  if(!btn||!menu) return;
+  btn.addEventListener('click',()=>{
+    const isOpen=menu.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded',isOpen?'true':'false');
+  });
+  // tanca en fer click a un enllaç
+  menu.addEventListener('click',e=>{
+    if(e.target.tagName==='A'){ menu.classList.remove('is-open'); btn.setAttribute('aria-expanded','false'); }
+  });
+});
+</script>
+
 <!-- GLightbox JS -->
 <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
 <script>
@@ -16,4 +32,14 @@
       closeOnOutsideClick: true
     });
   });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  if(window.matchMedia("(max-width: 900px)").matches){
+    document.querySelectorAll(".amenities-filter[open]").forEach(el => {
+      el.removeAttribute("open");
+    });
+  }
+});
 </script>

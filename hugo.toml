@@ -25,7 +25,16 @@ enableRobotsTXT = true
 [params]
   currency = "€"
   logo = "/img/logo.png"
-  formsubmit = "https://formsubmit.co/info@housesinlanzarote.org"
+  formsubmit = "https://formsubmit.co/housesinlanzarote@prois.es"
+
+[params.analytics]
+provider = "ga4"            # "ga4" | "plausible" | "none"
+ga4_id   = "G-XXXXXXXXXX"   # tu ID GA4 si usas ga4
+plausible_domain = "housesinlanzarote.eu"  # si usas plausible
+
+[params.cookies]
+consent_enabled = true
+storage_key = "cookieConsentV1"   # cambiar si haces breaking changes
 
 # Idiomes
 [languages]
@@ -38,7 +47,7 @@ enableRobotsTXT = true
     [languages.es.params]
       owner = "PROIS S.L."
       address = "Lanzarote, Islas Canarias"
-      email = "info@housesinlanzarote.eu"
+      email = "housesinlanzarote@prois.es"
       phone = "+34 619 234 405"
 
     [[languages.es.menu.main]]
@@ -66,7 +75,7 @@ enableRobotsTXT = true
     [languages.en.params]
       owner = "PROIS S.L."
       address = "Lanzarote, Canary Islands"
-      email = "info@housesinlanzarote.eu"
+      email = "housesinlanzarote@prois.es"
       phone = "+34 619 234 405"
     [[languages.en.menu.main]]
       name = "Home"
@@ -93,7 +102,7 @@ enableRobotsTXT = true
     [languages.de.params]
       owner = "PROIS S.L."
       address = "Lanzarote, Kanarische Inseln"
-      email = "info@housesinlanzarote.eu"
+      email = "housesinlanzarote@prois.es"
       phone = "+34 619 234 405"
     [[languages.de.menu.main]]
       name = "Startseite"
@@ -120,7 +129,7 @@ enableRobotsTXT = true
     [languages.fr.params]
       owner = "PROIS S.L."
       address = "Lanzarote, Îles Canaries"
-      email = "info@housesinlanzarote.eu"
+      email = "housesinlanzarote@prois.es"
       phone = "+34 619 234 405"
     [[languages.fr.menu.main]]
       name = "Accueil"
@@ -147,7 +156,7 @@ enableRobotsTXT = true
     [languages.it.params]
       owner = "PROIS S.L."
       address = "Lanzarote, Isole Canarie"
-      email = "info@housesinlanzarote.eu"
+      email = "housesinlanzarote@prois.es"
       phone = "+34 619 234 405"
 
     [[languages.it.menu.main]]
