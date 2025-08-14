@@ -1,32 +1,55 @@
 <article class="card -prop">
   <a href="{{ .RelPermalink }}" class="card__link">
 
-{{/* IMAGEN COVER: imatges[0] -> params.cover -> /img/{slug[-lanzarote]}-cover.webp */}}
-{{ $img := "" }}
-    {{ with .Params.imatges }}
-    {{ $img = index . 0 }}
-    {{ else }}
-    {{ with .Params.cover }}
-        {{ $img = . }}
-    {{ else }}
-        {{/* slug = carpeta del bundle; si no acaba en -lanzarote, l'afegim */}}
-        {{ $slug := "" }}
-        {{ with .File }}
-        {{ $slug = (path.Base .Dir) | urlize }}
-        {{ else }}
-        {{ $slug = .Title | urlize }}
-        {{ end }}
-        {{ if not (hasSuffix $slug "-lanzarote") }}
-        {{ $slug = printf "%s-%s" $slug "lanzarote" }}
-        {{ end }}
-        {{ $img = printf "/img/%s-cover.webp" $slug }}
-    {{ end }}
-    {{ end }}
+    {{/* COVER: 1) params.cover  2) fallback /img/{slug}-lanzarote-cover.webp  3) imatges[0] */}}
+    {{- $img := "" -}}
+
+    {{/* 1) cover explícit */}}
+    {{- with .Params.cover -}}
+      {{- $img = . -}}
+    {{- else -}}
+
+      {{/* 2) fallback construït */}}
+      {{- $slug := "" -}}
+
+      {{/* intentem obtenir el “slug base” del bundle o del fitxer */}}
+      {{- if .File -}}
+        {{- $slug = (path.Base .File.Dir) | urlize -}}
+        {{- if or (eq $slug "") (eq $slug "content") -}}
+          {{- $slug = .File.TranslationBaseName | urlize -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if eq $slug "" -}}
+        {{- $slug = (.Slug | default .Title) | urlize -}}
+      {{- end -}}
+
+      {{/* neteja sufixos de títol per evitar “-apartment”, “-appartement”, etc. */}}
+      {{- $slug = replaceRE "-(apartment|appartement|ferienwohnung|appartamento)$" "" $slug -}}
+
+      {{/* permetre override manual si cal */}}
+      {{- with .Params.cover_slug -}}
+        {{- $slug = . | urlize -}}
+      {{- end -}}
+
+      {{/* afegim -lanzarote si no hi és */}}
+      {{- if not (hasSuffix $slug "-lanzarote") -}}
+        {{- $slug = printf "%s-%s" $slug "lanzarote" -}}
+      {{- end -}}
+
+      {{- $img = printf "/img/%s-cover.webp" $slug -}}
+
+      {{/* 3) si encara no tenim res i hi ha galeria, fem servir la primera */}}
+      {{- if not $img -}}
+        {{- with .Params.imatges -}}
+          {{- $img = index . 0 -}}
+        {{- end -}}
+      {{- end -}}
+
+    {{- end -}}
 
     <div class="card__media">
       {{ with $img }}
-        <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" decoding="async"
-             style="object-fit:cover;width:100%;height:220px;">
+        <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy" decoding="async" style="object-fit:cover;width:100%;height:220px;">
       {{ end }}
       {{ with .Params.preu }}
         <span class="price-badge">{{ i18n "from_price" }} {{ . }}{{ $.Site.Params.currency }}{{ i18n "per_night" }}</span>
@@ -39,42 +62,84 @@
     <div class="card__body">
       <h3 class="card__title">{{ .Title }}</h3>
       <p class="card__meta">
-        {{ with .Params.zona }}
-          <i class="fa-solid fa-location-dot"></i> {{ delimit . ", " }}
-        {{ end }}
-        {{ if .Params.capacitat }} · <i class="fa-solid fa-users"></i> {{ .Params.capacitat }}{{ end }}
-        {{ with .Params.habitacions }} · <i class="fa-solid fa-bed"></i> {{ . }}{{ end }}
-        {{ with .Params.banys }} · <i class="fa-solid fa-bath"></i> {{ . }}{{ end }}
+        {{ with .Params.zona }}<i class="fa-solid fa-location-dot"></i> {{ delimit . ", " }}{{ end }}
+        {{ if .Params.capacitat }} · <span class="meta-item"><i class="fa-solid fa-users"></i> {{ .Params.capacitat }}</span>{{ end }} {{ with .Params.habitacions }}<span class="meta-item"><i class="fa-solid fa-bed"></i> {{ . }}</span>{{ end }} {{ with .Params.banys }}<span class="meta-item break-before"><i class="fa-solid fa-bath"></i> {{ . }}</span>{{ end }}
       </p>
 
       {{ with .Params.summary }}<p class="card__desc">{{ . }}</p>{{ end }}
 
-      {{ $iconMap := dict
-        "wifi" "fa-wifi"
-        "piscina" "fa-person-swimming"
-        "piscina climatizada" "fa-temperature-three-quarters"
-        "jacuzzi" "fa-hot-tub-person"
-        "aire acondicionado" "fa-fan"
-        "aparcamiento privado" "fa-square-parking"
-        "aparcamiento" "fa-square-parking"
-        "barbacoa" "fa-fire-burner"
-        "jardín" "fa-leaf"
-        "terraza" "fa-umbrella-beach"
-        "cocina" "fa-kitchen-set"
-        "cocina equipada" "fa-kitchen-set"
-        "lavadora" "fa-soap"
-        "smart tv" "fa-tv"
-        "tv" "fa-tv"
-      }}
-      {{ with .Params.amenitats }}
-        <ul class="mini-amenities">
-          {{ range first 4 . }}
-            {{ $label := . }}
-            {{ $icon := index $iconMap (lower $label) | default "fa-circle-check" }}
-            <li><i class="fa-solid {{ $icon }}"></i> {{ $label }}</li>
-          {{ end }}
-        </ul>
-      {{ end }}
+      {{/* === MINI-AMENITIES (multillengua, 1 sola piscina) === */}}
+{{ with .Params.amenitats }}
+  {{ $ams := . }}
+
+  {{/* set en minúscules per a consultes ràpides */}}
+  {{ $has := dict }}
+  {{ range $ams }}{{ $has = merge $has (dict (lower .) true) }}{{ end }}
+
+  {{/* variants de piscina (MINÚSCULES) */}}
+  {{ $poolTerms := slice
+    "piscina" "piscina privada" "piscina climatizada" "piscina comunitaria"
+    "pool" "private pool" "heated pool" "communal pool"
+    "piscine" "piscine privée" "piscine chauffée" "piscine commune" "piscina comune"
+    "piscina riscaldata" "piscina privata" "piscina condominiale"
+    "beheizter pool" "privater pool" "gemeinschaftspool"
+  }}
+
+  {{/* prioritat de piscina (mostra només la primera que trobi) */}}
+  {{ $poolPriority := slice
+    "piscina climatizada" "heated pool" "piscine chauffée" "piscina riscaldata" "beheizter pool"
+    "piscina privada" "private pool" "piscine privée" "piscina privata" "privater pool"
+    "piscina comunitaria" "communal pool" "piscine commune" "piscina condominiale" "gemeinschaftspool"
+    "piscina" "pool" "piscine"
+  }}
+
+  {{ $chosenPool := "" }}
+  {{ range $poolPriority }}
+    {{ if and (eq $chosenPool "") (index $has (lower .)) }}
+      {{ $chosenPool = . }}
+    {{ end }}
+  {{ end }}
+
+  {{/* llista filtrada sense duplicats de piscina */}}
+  {{ $filtered := slice }}
+  {{ range $ams }}
+    {{ if not (in $poolTerms (lower .)) }}
+      {{ $filtered = $filtered | append . }}
+    {{ end }}
+  {{ end }}
+
+  {{/* si hi ha piscina, la posem al davant com a única */}}
+  {{ if $chosenPool }}
+    {{ $filtered = (slice $chosenPool) | append $filtered }}
+  {{ end }}
+
+  {{ $iconMap := dict
+    "wifi" "fa-wifi"
+    "smart tv" "fa-tv" "tv" "fa-tv"
+    "cocina equipada" "fa-kitchen-set" "cocina" "fa-kitchen-set"
+    "terraza" "fa-umbrella-beach" "balcón" "fa-umbrella-beach" "jardín" "fa-leaf"
+    "barbacoa" "fa-fire-burner" "muebles de exterior" "fa-chair"
+    "lavadora" "fa-soap" "secador" "fa-wind" "lavavajillas" "fa-sink" "horno" "fa-oven" "microondas" "fa-bolt"
+    "aparcamiento" "fa-square-parking" "aparcamiento privado" "fa-square-parking" "aparcamiento cercano" "fa-square-parking"
+    "caja fuerte" "fa-vault"
+    "vistas al mar" "fa-water" "sea view" "fa-water" "vue mer" "fa-water" "blick aufs meer" "fa-water" "vista mare" "fa-water"
+    "ventilador" "fa-fan" "aire acondicionado" "fa-fan" "air conditioning" "fa-fan" "climatisation" "fa-fan" "klimaanlage" "fa-fan" "aria condizionata" "fa-fan"
+    "piscina" "fa-person-swimming" "pool" "fa-person-swimming" "piscine" "fa-person-swimming"
+    "piscina privada" "fa-person-swimming" "private pool" "fa-person-swimming" "piscine privée" "fa-person-swimming" "piscina privata" "fa-person-swimming" "privater pool" "fa-person-swimming"
+    "piscina comunitaria" "fa-person-swimming" "communal pool" "fa-person-swimming" "piscina commune" "fa-person-swimming" "piscina condominiale" "fa-person-swimming" "gemeinschaftspool" "fa-person-swimming"
+    "piscina climatizada" "fa-temperature-three-quarters" "heated pool" "fa-temperature-three-quarters" "piscine chauffée" "fa-temperature-three-quarters" "piscina riscaldata" "fa-temperature-three-quarters" "beheizter pool" "fa-temperature-three-quarters"
+    "jacuzzi" "fa-hot-tub-person" "water slide" "fa-water-ladder" "tobogán acuático" "fa-water-ladder"
+  }}
+
+  <ul class="mini-amenities">
+    {{ range first 6 $filtered }}
+      {{ $label := . }}
+      {{ $key := lower $label }}
+      {{ $icon := index $iconMap $key | default "fa-circle-check" }}
+      <li><i class="fa-solid {{ $icon }}"></i> {{ $label }}</li>
+    {{ end }}
+  </ul>
+{{ end }}
 
       <span class="btn-inline">{{ i18n "view_details" }}</span>
     </div>
