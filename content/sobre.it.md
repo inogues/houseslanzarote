@@ -9,7 +9,7 @@ gallery:
   - { src: '/img/lanzarote-carretera-timanfaya.webp', alt: 'Strada per Timanfaya, Lanzarote' }
   - { src: '/img/lanzarote-surf-playa-famara.webp', alt: 'Surfista alla spiaggia di Famara, Lanzarote' }
   - { src: '/img/lanzarote-barca-costa-famara.webp', alt: 'Barca tradizionale sulla costa nord di Lanzarote' }
-  - { src: '/img/lanzarote-playa-blanca-aerea.webp', alt: 'Vista aerea di Playa Blanca, Lanzarote' }
+  - { src: '/img/lanzarote-pagayo-beach.webp', alt: 'Vista aerea di Playa Papagayo, Lanzarote' }
   - { src: '/img/lanzarote-isla-graciosa.webp', alt: 'Vista panoramica de La Graciosa da Lanzarote' }
   - { src: '/img/lanzarote-playa-dorada.webp', alt: 'Playa Dorada a Playa Blanca, Lanzarote' }
   - { src: '/img/lanzarote-vista-la-graciosa.webp', alt: 'Vista de La Graciosa dal Mirador del Río' }
@@ -47,7 +47,7 @@ Qui troverai di tutto: dalle calette tranquille ai vivaci lungomare, ristoranti 
 - Le spiagge di **Papagayo** e **Playa Blanca**  
 - I vigneti di **La Geria**  
 - I villaggi pittoreschi come **Yaiza** o **Haría**  
-- E molto altro, come **Tamara** o le opere del genio **César Manrique**
+- E molto altro, come **Famara** o le opere del genio **César Manrique**
 <!--col-break-->
 
 ## Attenzione vicina e personale

@@ -9,7 +9,7 @@ gallery:
   - { src: '/img/lanzarote-carretera-timanfaya.webp', alt: 'Road to Timanfaya, Lanzarote' }
   - { src: '/img/lanzarote-surf-playa-famara.webp', alt: 'Surfer at Famara beach, Lanzarote' }
   - { src: '/img/lanzarote-barca-costa-famara.webp', alt: 'Traditional boat on the north coast of Lanzarote' }
-  - { src: '/img/lanzarote-playa-blanca-aerea.webp', alt: 'Aerial view of Playa Blanca, Lanzarote' }
+  - { src: '/img/lanzarote-pagayo-beach.webp', alt: 'Aerial view of Papagayo Beach, Lanzarote' }
   - { src: '/img/lanzarote-isla-graciosa.webp', alt: 'Panoramic view of La Graciosa from Lanzarote' }
   - { src: '/img/lanzarote-playa-dorada.webp', alt: 'Playa Dorada in Playa Blanca, Lanzarote' }
   - { src: '/img/lanzarote-vista-la-graciosa.webp', alt: 'View of La Graciosa from Mirador del Río' }
@@ -47,7 +47,7 @@ It is also the ideal starting point to explore the whole island:
 - The beaches of **Papagayo** and **Playa Blanca**  
 - The vineyards of **La Geria**  
 - Charming villages such as **Yaiza** or **Haría**  
-- And much more like **Tamara** or visiting the creations of genius **César Manrique**
+- And much more like **Famara** or visiting the creations of genius **César Manrique**
 <!--col-break-->
 
 ## Close and personal attention
