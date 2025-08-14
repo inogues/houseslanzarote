@@ -1,0 +1,57 @@
+name: Deploy Production (AWS S3 + CloudFront)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.146.0'
+          extended: true
+
+      - name: Build Hugo (production)
+        run: |
+          rm -f static/robots.txt || true   # assegura que no queda el noindex de staging
+          hugo --minify --gc --enableGitInfo --cleanDestinationDir -e production --baseURL "https://housesinlanzarote.eu/"
+          
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # HTML: cache curt
+      - name: Sync HTML (short cache)
+        run: |
+          aws s3 sync ./public s3://${{ vars.PROD_BUCKET }} \
+            --delete --exact-timestamps \
+            --exclude "*" --include "*.html" \
+            --cache-control "no-cache, no-store, must-revalidate"
+
+      # La resta (CSS/JS/img) amb cache llarg
+      - name: Sync assets (long cache)
+        run: |
+          aws s3 sync ./public s3://${{ vars.PROD_BUCKET }} \
+            --delete --exact-timestamps \
+            --exclude "*.html" \
+            --cache-control "public, max-age=31536000, immutable"
+
+      - name: Invalidate CloudFront
+        if: ${{ secrets.CF_DIST_ID_PROD != '' }}
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${{ secrets.CF_DIST_ID_PROD }}" \
+            --paths "/*"
