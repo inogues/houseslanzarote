@@ -1,0 +1,125 @@
+pool:
+  label_key: "amenity_pool"
+  icon: "fa-person-swimming"
+  group: "pool"
+  priority: 10
+pool_private:
+  label_key: "amenity_pool_private"
+  icon: "fa-person-swimming"
+  group: "pool"
+  priority: 20
+pool_heated:
+  label_key: "amenity_pool_heated"
+  icon: "fa-temperature-three-quarters"
+  group: "pool"
+  priority: 30
+pool_communal:
+  label_key: "amenity_pool_communal"
+  icon: "fa-person-swimming"
+  group: "pool"
+  priority: 5
+jacuzzi:
+  label_key: "amenity_jacuzzi"
+  icon: "fa-hot-tub-person"
+  group: "wellness"
+  priority: 8
+wifi:
+  label_key: "amenity_wifi"
+  icon: "fa-wifi"
+  group: "tech"
+  priority: 6
+smart_tv:
+  label_key: "amenity_smart_tv"
+  icon: "fa-tv"
+  group: "tech"
+  priority: 4
+ac:
+  label_key: "amenity_ac"
+  icon: "fa-fan"
+  group: "comfort"
+  priority: 7
+fan:
+  label_key: "amenity_fan"
+  icon: "fa-fan"
+  group: "comfort"
+  priority: 3
+safe_box:
+  label_key: "amenity_safe_box"
+  icon: "fa-vault"
+  group: "comfort"
+  priority: 2
+kitchen_equipped:
+  label_key: "amenity_kitchen_equipped"
+  icon: "fa-kitchen-set"
+  group: "kitchen"
+  priority: 7
+dishwasher:
+  label_key: "amenity_dishwasher"
+  icon: "fa-sink"
+  group: "kitchen"
+  priority: 5
+oven:
+  label_key: "amenity_oven"
+  icon: "fa-temperature-high "
+  group: "kitchen"
+  priority: 3
+microwave:
+  label_key: "amenity_microwave"
+  icon: "fa-bolt"
+  group: "kitchen"
+  priority: 2
+bbq:
+  label_key: "amenity_bbq"
+  icon: "fa-fire-burner"
+  group: "outdoor"
+  priority: 6
+outdoor_furniture:
+  label_key: "amenity_outdoor_furniture"
+  icon: "fa-chair"
+  group: "outdoor"
+  priority: 3
+terrace:
+  label_key: "amenity_terrace"
+  icon: "fa-umbrella-beach"
+  group: "outdoor"
+  priority: 5
+balcony:
+  label_key: "amenity_balcony"
+  icon: "fa-umbrella-beach"
+  group: "outdoor"
+  priority: 2
+garden:
+  label_key: "amenity_garden"
+  icon: "fa-leaf"
+  group: "outdoor"
+  priority: 4
+sea_view:
+  label_key: "amenity_sea_view"
+  icon: "fa-water"
+  group: "outdoor"
+  priority: 8
+waterslide:
+  label_key: "amenity_waterslide"
+  icon: "fa-water-ladder"
+  group: "outdoor"
+  priority: 1
+parking_private:
+  label_key: "amenity_parking_private"
+  icon: "fa-square-parking"
+  group: "parking"
+  priority: 4
+parking_nearby:
+  label_key: "amenity_parking_nearby"
+  icon: "fa-square-parking"
+  group: "parking"
+  priority: 2
+washing_machine:
+  label_key: "amenity_washing_machine"
+  icon: "fa-soap"
+  group: "utilities"
+  priority: 4
+hair_dryer:
+  label_key: "amenity_hair_dryer"
+  icon: "fa-wind"
+  group: "utilities"
+  priority: 2

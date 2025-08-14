@@ -59,6 +59,9 @@
       {{ end }}
     </div>
 
+
+
+
     <div class="card__body">
       <h3 class="card__title">{{ .Title }}</h3>
       <p class="card__meta">
@@ -68,80 +71,51 @@
 
       {{ with .Params.summary }}<p class="card__desc">{{ . }}</p>{{ end }}
 
-      {{/* === MINI-AMENITIES (multillengua, 1 sola piscina) === */}}
-{{ with .Params.amenitats }}
-  {{ $ams := . }}
+      {{/* Mini amenities amb claus canòniques, 1 sola piscina (prioritat màxima), màxim 6 */}}
+      {{ $defs := site.Data.amenities }}
+      {{ with .Params.amenitats }}
+        {{ $keys := . }}
+        {{/* separar piscines i resta */}}
+        {{ $pools := slice }}{{ $others := slice }}
+        {{ range $keys }}
+          {{ $def := index $defs . }}
+          {{ if $def }}
+            {{ if eq $def.group "pool" }}
+              {{ $pools = $pools | append (dict "key" . "prio" $def.priority) }}
+            {{ else }}
+              {{ $others = $others | append . }}
+            {{ end }}
+          {{ else }}
+            {{ $others = $others | append . }}
+          {{ end }}
+        {{ end }}
 
-  {{/* set en minúscules per a consultes ràpides */}}
-  {{ $has := dict }}
-  {{ range $ams }}{{ $has = merge $has (dict (lower .) true) }}{{ end }}
+        {{/* tria UNA piscina: màxima prioritat */}}
+        {{ $poolKey := "" }}
+        {{ if gt (len $pools) 0 }}
+          {{ $sorted := sort $pools "prio" "desc" }}
+          {{ $poolKey = index (index $sorted 0) "key" }}
+        {{ end }}
 
-  {{/* variants de piscina (MINÚSCULES) */}}
-  {{ $poolTerms := slice
-    "piscina" "piscina privada" "piscina climatizada" "piscina comunitaria"
-    "pool" "private pool" "heated pool" "communal pool"
-    "piscine" "piscine privée" "piscine chauffée" "piscine commune" "piscina comune"
-    "piscina riscaldata" "piscina privata" "piscina condominiale"
-    "beheizter pool" "privater pool" "gemeinschaftspool"
-  }}
+        {{/* llista final: piscina triada + resta, fins a 6 */}}
+        {{ $final := slice }}
+        {{ if $poolKey }}{{ $final = $final | append $poolKey }}{{ end }}
+        {{ range $others }}{{ $final = $final | append . }}{{ end }}
 
-  {{/* prioritat de piscina (mostra només la primera que trobi) */}}
-  {{ $poolPriority := slice
-    "piscina climatizada" "heated pool" "piscine chauffée" "piscina riscaldata" "beheizter pool"
-    "piscina privada" "private pool" "piscine privée" "piscina privata" "privater pool"
-    "piscina comunitaria" "communal pool" "piscine commune" "piscina condominiale" "gemeinschaftspool"
-    "piscina" "pool" "piscine"
-  }}
-
-  {{ $chosenPool := "" }}
-  {{ range $poolPriority }}
-    {{ if and (eq $chosenPool "") (index $has (lower .)) }}
-      {{ $chosenPool = . }}
-    {{ end }}
-  {{ end }}
-
-  {{/* llista filtrada sense duplicats de piscina */}}
-  {{ $filtered := slice }}
-  {{ range $ams }}
-    {{ if not (in $poolTerms (lower .)) }}
-      {{ $filtered = $filtered | append . }}
-    {{ end }}
-  {{ end }}
-
-  {{/* si hi ha piscina, la posem al davant com a única */}}
-  {{ if $chosenPool }}
-    {{ $filtered = (slice $chosenPool) | append $filtered }}
-  {{ end }}
-
-  {{ $iconMap := dict
-    "wifi" "fa-wifi"
-    "smart tv" "fa-tv" "tv" "fa-tv"
-    "cocina equipada" "fa-kitchen-set" "cocina" "fa-kitchen-set"
-    "terraza" "fa-umbrella-beach" "balcón" "fa-umbrella-beach" "jardín" "fa-leaf"
-    "barbacoa" "fa-fire-burner" "muebles de exterior" "fa-chair"
-    "lavadora" "fa-soap" "secador" "fa-wind" "lavavajillas" "fa-sink" "horno" "fa-oven" "microondas" "fa-bolt"
-    "aparcamiento" "fa-square-parking" "aparcamiento privado" "fa-square-parking" "aparcamiento cercano" "fa-square-parking"
-    "caja fuerte" "fa-vault"
-    "vistas al mar" "fa-water" "sea view" "fa-water" "vue mer" "fa-water" "blick aufs meer" "fa-water" "vista mare" "fa-water"
-    "ventilador" "fa-fan" "aire acondicionado" "fa-fan" "air conditioning" "fa-fan" "climatisation" "fa-fan" "klimaanlage" "fa-fan" "aria condizionata" "fa-fan"
-    "piscina" "fa-person-swimming" "pool" "fa-person-swimming" "piscine" "fa-person-swimming"
-    "piscina privada" "fa-person-swimming" "private pool" "fa-person-swimming" "piscine privée" "fa-person-swimming" "piscina privata" "fa-person-swimming" "privater pool" "fa-person-swimming"
-    "piscina comunitaria" "fa-person-swimming" "communal pool" "fa-person-swimming" "piscina commune" "fa-person-swimming" "piscina condominiale" "fa-person-swimming" "gemeinschaftspool" "fa-person-swimming"
-    "piscina climatizada" "fa-temperature-three-quarters" "heated pool" "fa-temperature-three-quarters" "piscine chauffée" "fa-temperature-three-quarters" "piscina riscaldata" "fa-temperature-three-quarters" "beheizter pool" "fa-temperature-three-quarters"
-    "jacuzzi" "fa-hot-tub-person" "water slide" "fa-water-ladder" "tobogán acuático" "fa-water-ladder"
-  }}
-
-  <ul class="mini-amenities">
-    {{ range first 6 $filtered }}
-      {{ $label := . }}
-      {{ $key := lower $label }}
-      {{ $icon := index $iconMap $key | default "fa-circle-check" }}
-      <li><i class="fa-solid {{ $icon }}"></i> {{ $label }}</li>
-    {{ end }}
-  </ul>
-{{ end }}
-
+        <ul class="mini-amenities">
+          {{ range first 6 $final }}
+            {{ $def := index $defs . }}
+            {{ $icon := cond $def $def.icon "fa-circle-check" }}
+            {{ $labelKey := cond $def $def.label_key "" }}
+            <li>
+              <i class="fa-solid {{ $icon }}"></i>
+              {{ if $labelKey }}{{ i18n $labelKey }}{{ else }}{{ . }}{{ end }}
+            </li>
+          {{ end }}
+        </ul>
+      {{ end }}
       <span class="btn-inline">{{ i18n "view_details" }}</span>
     </div>
   </a>
 </article>
+

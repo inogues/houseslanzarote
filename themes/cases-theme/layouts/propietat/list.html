@@ -13,14 +13,38 @@
   </select>
 
   <!-- Amenidades: a sota, tota l’amplada -->
-  <details class="amenities-filter" open>
-    <summary><i class="fa-solid fa-sliders"></i> {{ i18n "filter_amenities" }}</summary>
-    <div class="amenities-grid">
-      {{ range .Site.Taxonomies.amenitats.Alphabetical }}
-        <label><input type="checkbox" name="amen" value="{{ .Name | lower }}"> {{ .Name }}</label>
-      {{ end }}
-    </div>
-  </details>
+{{/* Loader robust de definicions d’amenitats */}}
+{{- $lang := .Site.Language.Lang -}}
+{{- $defs := dict -}}
+{{- if and (isset .Site.Data "_default") (isset (index .Site.Data "_default") "amenities") -}}
+  {{- $defs = (index .Site.Data "_default" "amenities") -}}
+{{- else if isset .Site.Data "amenities" -}}
+  {{- $defs = (index .Site.Data "amenities") -}}
+{{- else if and (isset .Site.Data $lang) (isset (index .Site.Data $lang) "amenities") -}}
+  {{- $defs = (index .Site.Data $lang "amenities") -}}
+{{- end -}}
+
+<details class="amenities-filter" open>
+  <summary><i class="fa-solid fa-sliders"></i> {{ i18n "filter_amenities" }}</summary>
+
+  <div class="amenities-grid">
+    {{- $items := slice -}}
+    {{- range $key, $def := $defs -}}
+      {{- $label := cond (isset $def "label_key") (i18n $def.label_key) $key -}}
+      {{- $items = $items | append (merge $def (dict "key" $key "label" $label)) -}}
+    {{- end -}}
+
+    {{/* Ordre: group -> priority desc -> label (estable) */}}
+    {{- $items = sort (sort (sort $items "group") "priority" "desc") "label" -}}
+
+    {{- range $items -}}
+      <label>
+        <input type="checkbox" name="amen" value="{{ .key }}">
+        {{ .label }}
+      </label>
+    {{- end -}}
+  </div>
+</details>
 </form>
 
   <!-- Grid -->

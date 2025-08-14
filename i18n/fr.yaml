@@ -110,3 +110,53 @@
   translation: "Plus d'informations"
 - id: cookie_policy_link
   translation: "Lire la politique de cookies"
+- id: amenity_pool            
+  translation: "piscine"
+- id: amenity_pool_private    
+  translation: "piscine privée"
+- id: amenity_pool_heated     
+  translation: "piscine chauffée"
+- id: amenity_pool_communal   
+  translation: "piscine commune"
+- id: amenity_jacuzzi         
+  translation: "jacuzzi"
+- id: amenity_wifi            
+  translation: "wifi"
+- id: amenity_smart_tv        
+  translation: "smart tv"
+- id: amenity_ac              
+  translation: "climatisation"
+- id: amenity_fan             
+  translation: "ventilateur"
+- id: amenity_safe_box        
+  translation: "coffre-fort"
+- id: amenity_kitchen_equipped
+  translation: "cuisine équipée"
+- id: amenity_dishwasher      
+  translation: "lave-vaisselle"
+- id: amenity_oven            
+  translation: "four"
+- id: amenity_microwave       
+  translation: "micro-ondes"
+- id: amenity_bbq             
+  translation: "barbecue"
+- id: amenity_outdoor_furniture
+  translation: "mobilier d’extérieur"
+- id: amenity_terrace         
+  translation: "terrasse"
+- id: amenity_balcony         
+  translation: "balcon"
+- id: amenity_garden          
+  translation: "jardin"
+- id: amenity_sea_view        
+  translation: "vue mer"
+- id: amenity_waterslide      
+  translation: "toboggan aquatique"
+- id: amenity_parking_private 
+  translation: "parking privé"
+- id: amenity_parking_nearby  
+  translation: "parking à proximité"
+- id: amenity_washing_machine 
+  translation: "lave-linge"
+- id: amenity_hair_dryer      
+  translation: "sèche-cheveux"

@@ -46,37 +46,18 @@
       <section class="descripcio">
         {{ .Content }}
 
-        <!-- AMENIDADES con iconos -->
-        {{ $iconMap := dict
-          "wifi" "fa-wifi"
-          "piscina" "fa-person-swimming"
-          "piscina climatizada" "fa-temperature-three-quarters"
-          "jacuzzi" "fa-hot-tub-person"
-          "aire acondicionado" "fa-fan"
-          "aparcamiento privado" "fa-square-parking"
-          "aparcamiento" "fa-square-parking"
-          "barbacoa" "fa-fire-burner"
-          "jardín" "fa-leaf"
-          "terraza" "fa-umbrella-beach"
-          "cocina" "fa-kitchen-set"
-          "cocina equipada" "fa-kitchen-set"
-          "lavadora" "fa-soap"
-          "secador" "fa-wind"
-          "smart tv" "fa-tv"
-          "tv" "fa-tv"
-          "vistas al mar" "fa-water"
-        }}
+        {{ $defs := site.Data.amenities }}
 
-        <div class="amenitats">
-          <h3><i class="fa-solid fa-list-check"></i> {{ i18n "amenities" }}</h3>
-          <ul class="amenity-chips">
-            {{ range .Params.amenitats }}
-              {{ $raw := . }}
-              {{ $key := lower $raw }}
-              {{ $icon := index $iconMap $key | default "fa-circle-check" }}
-              <li><i class="fa-solid {{ $icon }}"></i> {{ $raw }}</li>
-            {{ end }}
-          </ul>
+        <div class="mt-2" >
+        <ul class="amenity-chips">
+          {{ range .Params.amenitats }}
+            {{ $def := index $defs . }}
+            <li>
+              <i class="fa-solid {{ cond $def $def.icon "fa-circle-check" }}"></i>
+              {{ if $def }}{{ i18n $def.label_key }}{{ else }}{{ . }}{{ end }}
+            </li>
+          {{ end }}
+        </ul>
         </div>
 
         <!-- MAPA -->
