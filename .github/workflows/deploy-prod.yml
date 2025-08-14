@@ -11,6 +11,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: production
+    env:
+      PROD_BUCKET: ${{ vars.PROD_BUCKET }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+      CF_DIST_ID_PROD: ${{ secrets.CF_DIST_ID_PROD }}
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,34 +30,36 @@ jobs:
 
       - name: Build Hugo (production)
         run: |
-          rm -f static/robots.txt || true   # assegura que no queda el noindex de staging
-          hugo --minify --gc --enableGitInfo --cleanDestinationDir -e production --baseURL "https://housesinlanzarote.eu/"
-          
+          rm -f static/robots.txt || true
+          hugo --minify --gc --enableGitInfo --cleanDestinationDir \
+               -e production \
+               --baseURL "https://housesinlanzarote.eu/"
+
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
 
       # HTML: cache curt
       - name: Sync HTML (short cache)
         run: |
-          aws s3 sync ./public s3://${{ vars.PROD_BUCKET }} \
+          aws s3 sync ./public s3://${{ env.PROD_BUCKET }} \
             --delete --exact-timestamps \
             --exclude "*" --include "*.html" \
             --cache-control "no-cache, no-store, must-revalidate"
 
-      # La resta (CSS/JS/img) amb cache llarg
+      # Assets: cache llarg
       - name: Sync assets (long cache)
         run: |
-          aws s3 sync ./public s3://${{ vars.PROD_BUCKET }} \
+          aws s3 sync ./public s3://${{ env.PROD_BUCKET }} \
             --delete --exact-timestamps \
             --exclude "*.html" \
             --cache-control "public, max-age=31536000, immutable"
 
       - name: Invalidate CloudFront
-        if: ${{ secrets.CF_DIST_ID_PROD != '' }}
+        if: ${{ env.CF_DIST_ID_PROD != '' }}
         run: |
           aws cloudfront create-invalidation \
-            --distribution-id "${{ secrets.CF_DIST_ID_PROD }}" \
+            --distribution-id "${{ env.CF_DIST_ID_PROD }}" \
             --paths "/*"
