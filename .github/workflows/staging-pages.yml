@@ -33,10 +33,7 @@ jobs:
           echo "Disallow: /" >> static/robots.txt
 
       - name: Build Hugo
-        run: hugo --minify --gc --enableGitInfo \
-                  --cleanDestinationDir \
-                  -e staging \
-                  --baseURL "https://test.housesinlanzarote.eu"
+        run: hugo --minify --gc --enableGitInfo --cleanDestinationDir -e staging --baseURL "https://test.housesinlanzarote.eu"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
